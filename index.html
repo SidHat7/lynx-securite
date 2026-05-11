@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LYNX SÉCURITÉ — Accueil</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* ── RESET & VARS ── */
+    :root{--navy:#0B1D3A;--blue:#1D4ED8;--blue-h:#1740B8;--gold:#C9A84C;--gold-l:#E2C47A;--white:#fff;--off:#F7F8FA;--lgray:#EEF1F6;--mgray:#8899B0;--dark:#1A2B42;--body:#4A5E74;--border:#DDE3EC;--sh-sm:0 2px 8px rgba(11,29,58,.08);--sh-md:0 8px 32px rgba(11,29,58,.12);--sh-lg:0 20px 60px rgba(11,29,58,.18)}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',sans-serif;color:var(--body);background:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    a{text-decoration:none}
+    img{display:block;max-width:100%}
+    .container{max-width:1200px;margin:0 auto;padding:0 2rem}
+
+    /* ── SHARED NAV ── */
+    #navbar{position:fixed;top:0;width:100%;z-index:1000;background:transparent;transition:background .35s,box-shadow .35s}
+    #navbar.scrolled{background:var(--navy);box-shadow:0 2px 24px rgba(0,0,0,.3)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;height:76px}
+    .nav-logo{display:flex;align-items:center;gap:12px}
+    .logo-icon{width:42px;height:42px;background:var(--blue);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .logo-icon i{color:#fff;font-size:1.1rem}
+    .logo-text{font-size:1.1rem;font-weight:700;color:#fff;letter-spacing:.04em}
+    .logo-text span{color:var(--gold)}
+    .logo-sub{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);display:block;margin-top:1px}
+    .nav-links{display:flex;align-items:center;gap:2rem}
+    .nav-links a{font-size:.875rem;font-weight:500;color:rgba(255,255,255,.7);transition:color .2s;position:relative;padding-bottom:4px}
+    .nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--gold);transition:width .25s}
+    .nav-links a:hover,.nav-links a.active{color:#fff}
+    .nav-links a:hover::after,.nav-links a.active::after{width:100%}
+    .nav-cta{padding:.55rem 1.3rem;background:var(--gold);color:var(--navy)!important;font-weight:700!important;border-radius:4px;transition:background .25s,box-shadow .25s!important}
+    .nav-cta::after{display:none!important}
+    .nav-cta:hover{background:var(--gold-l)!important;box-shadow:0 4px 16px rgba(201,168,76,.4)!important}
+    .hamburger{display:none;background:none;border:none;cursor:pointer;color:#fff;font-size:1.4rem}
+    .mob-nav{display:none;flex-direction:column;background:var(--navy);position:absolute;top:100%;width:100%;border-top:1px solid rgba(255,255,255,.08)}
+    .mob-nav.open{display:flex}
+    .mob-nav a{padding:.9rem 2rem;color:rgba(255,255,255,.75);font-weight:500;border-bottom:1px solid rgba(255,255,255,.06);transition:color .2s,background .2s}
+    .mob-nav a:hover{color:var(--gold);background:rgba(255,255,255,.03)}
+
+    /* ── BUTTONS ── */
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:.85rem 2rem;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;border:none;cursor:pointer;border-radius:4px;transition:all .25s}
+    .btn-primary{background:var(--blue);color:#fff}
+    .btn-primary:hover{background:var(--blue-h);box-shadow:0 6px 24px rgba(29,78,216,.35);transform:translateY(-1px)}
+    .btn-outline-w{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+    .btn-outline-w:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.8)}
+    .btn-gold{background:var(--gold);color:var(--navy)}
+    .btn-gold:hover{background:var(--gold-l);box-shadow:0 6px 24px rgba(201,168,76,.35);transform:translateY(-1px)}
+    .btn-outline{background:transparent;color:var(--blue);border:1.5px solid var(--blue)}
+    .btn-outline:hover{background:var(--blue);color:#fff}
+
+    /* ── SECTION COMMONS ── */
+    .section-tag{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:1rem}
+    .section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:700;color:var(--dark);line-height:1.2;margin-bottom:1rem}
+    .section-title-w{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:700;color:#fff;line-height:1.2;margin-bottom:1rem}
+    .divider{width:48px;height:3px;background:var(--gold);margin-bottom:1.5rem;border-radius:2px}
+    .divider-c{margin-left:auto;margin-right:auto}
+    .reveal{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
+    .reveal.on{opacity:1;transform:none}
+    .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+    /* ── HERO ── */
+    #hero{position:relative;min-height:100vh;display:flex;align-items:center;background:var(--navy);overflow:hidden}
+    .h-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=2070') center/cover;opacity:.08}
+    .h-ov{position:absolute;inset:0;background:linear-gradient(130deg,rgba(11,29,58,1) 45%,rgba(18,32,64,.85) 100%)}
+    .h-deco{position:absolute;right:0;top:0;bottom:0;width:42%;background:linear-gradient(160deg,rgba(29,78,216,.12),transparent 70%);border-left:1px solid rgba(255,255,255,.05)}
+    .h-line{position:absolute;left:0;top:0;width:4px;height:100%;background:linear-gradient(180deg,transparent,var(--gold) 30%,var(--gold) 70%,transparent)}
+    .hero-inner{position:relative;z-index:10;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;padding:8rem 2rem 6rem;max-width:1200px;margin:0 auto;width:100%}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);color:var(--gold-l);font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:.4rem 1rem;border-radius:2px;margin-bottom:1.8rem}
+    .live-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+    h1.ht{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,4.5vw,4rem);font-weight:900;line-height:1.1;color:#fff;margin-bottom:1.6rem}
+    h1.ht em{font-style:normal;color:var(--gold)}
+    .hero-desc{font-size:1.05rem;line-height:1.85;color:rgba(255,255,255,.6);margin-bottom:2.5rem;max-width:480px}
+    .hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+    .hero-stats{margin-top:3.5rem;padding-top:2.5rem;border-top:1px solid rgba(255,255,255,.1);display:flex;gap:3rem;flex-wrap:wrap}
+    .hstat-num{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:#fff;display:block;line-height:1}
+    .hstat-lbl{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:4px;display:block}
+    /* Hero right card */
+    .hero-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:2.5rem;backdrop-filter:blur(8px)}
+    .hcard-title{font-size:.75rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:1.5rem;display:flex;align-items:center;gap:8px}
+    .hcard-title::before{content:'';width:20px;height:1px;background:var(--gold)}
+    .svc-pill{display:flex;align-items:center;gap:14px;padding:.9rem 1.2rem;border:1px solid rgba(255,255,255,.07);border-radius:6px;margin-bottom:.7rem;background:rgba(255,255,255,.03);transition:all .25s}
+    .svc-pill:hover{border-color:rgba(201,168,76,.35);background:rgba(201,168,76,.05)}
+    .pill-ico{width:36px;height:36px;background:rgba(29,78,216,.25);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .pill-ico i{color:var(--gold-l);font-size:.9rem}
+    .pill-txt strong{display:block;font-size:.88rem;font-weight:600;color:#fff}
+    .pill-txt span{font-size:.76rem;color:rgba(255,255,255,.4)}
+    .hcard-cta{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:space-between}
+    .resp-badge{font-size:.78rem;color:rgba(255,255,255,.4)}
+    .resp-badge strong{color:var(--gold-l)}
+
+    /* ── CLIENTS ── */
+    .clients-bar{background:var(--lgray);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1.2rem 0}
+    .clients-inner{display:flex;align-items:center;gap:3rem;flex-wrap:wrap}
+    .cli-label{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--mgray);white-space:nowrap;font-weight:600}
+    .cli-logos{display:flex;align-items:center;gap:2.5rem;flex-wrap:wrap}
+    .cli-logo{font-size:.82rem;font-weight:600;color:#B0BECF;letter-spacing:.05em}
+
+    /* ── STATS BAR ── */
+    .stats-bar{background:var(--navy);padding:4rem 0}
+    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+    .stat-block{padding:2rem 2.5rem;border-right:1px solid rgba(255,255,255,.08);text-align:center}
+    .stat-block:last-child{border-right:none}
+    .stat-n{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:700;color:#fff;display:block;line-height:1}
+    .stat-n .u{font-size:1.4rem;color:var(--gold)}
+    .stat-l{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:8px;display:block}
+
+    /* ── SERVICES PREVIEW ── */
+    #services-preview{padding:6rem 0;background:var(--white)}
+    .svc-hdr{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3.5rem;gap:2rem;flex-wrap:wrap}
+    .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--border);border:1.5px solid var(--border)}
+    .svc-card{background:#fff;padding:2.2rem 2rem;transition:all .3s;position:relative;overflow:hidden;display:block;color:inherit}
+    .svc-card::after{content:'';position:absolute;bottom:0;left:0;width:0;height:3px;background:var(--blue);transition:width .35s}
+    .svc-card:hover{background:var(--off);box-shadow:var(--sh-md);z-index:1}
+    .svc-card:hover::after{width:100%}
+    .svc-num{font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:var(--lgray);line-height:1;margin-bottom:1rem;display:block}
+    .svc-card:hover .svc-num{color:rgba(29,78,216,.08)}
+    .svc-icon{font-size:1.3rem;color:var(--blue);margin-bottom:.8rem}
+    .svc-card h3{font-size:1rem;font-weight:600;color:var(--dark);margin-bottom:.5rem}
+    .svc-card p{font-size:.86rem;line-height:1.7;color:var(--body)}
+    .svc-arr{position:absolute;bottom:1.4rem;right:1.4rem;color:var(--border);font-size:.85rem;transition:all .3s}
+    .svc-card:hover .svc-arr{color:var(--blue);transform:translate(2px,-2px)}
+
+    /* ── WHY US ── */
+    #why{padding:6rem 0;background:var(--off);border-top:1px solid var(--border)}
+    .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+    .why-img{border-radius:6px;overflow:hidden;box-shadow:var(--sh-lg)}
+    .why-img img{width:100%;filter:grayscale(30%) brightness(.9);transition:filter .5s}
+    .why-img:hover img{filter:none}
+    .why-list{list-style:none;margin-top:2rem}
+    .why-item{display:flex;gap:14px;padding:1rem 0;border-bottom:1px solid var(--border);align-items:flex-start}
+    .why-item:first-child{border-top:1px solid var(--border)}
+    .wi-icon{width:28px;height:28px;background:rgba(29,78,216,.08);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+    .wi-icon i{font-size:.65rem;color:var(--blue)}
+    .wi-t strong{display:block;font-size:.9rem;font-weight:600;color:var(--dark);margin-bottom:2px}
+    .wi-t span{font-size:.82rem;color:var(--body);line-height:1.5}
+
+    /* ── CTA BAND ── */
+    .cta-band{background:var(--navy);padding:5rem 0;text-align:center;position:relative;overflow:hidden}
+    .cta-band::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(29,78,216,.15),transparent 60%)}
+    .cta-band h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);color:#fff;margin-bottom:1rem;position:relative}
+    .cta-band p{color:rgba(255,255,255,.55);font-size:1rem;max-width:500px;margin:0 auto 2.5rem;position:relative}
+    .cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative}
+
+    /* ── FOOTER ── */
+    footer{background:#070E1C;padding:4rem 0 2rem}
+    .ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:4rem;margin-bottom:3rem}
+    .ft-about p{font-size:.88rem;line-height:1.8;color:rgba(255,255,255,.3);margin:1rem 0 1.5rem;max-width:280px}
+    .ft-socials{display:flex;gap:.6rem}
+    .ft-socials a{width:34px;height:34px;border:1px solid rgba(255,255,255,.1);border-radius:4px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.3);font-size:.85rem;transition:all .2s}
+    .ft-socials a:hover{border-color:var(--gold);color:var(--gold)}
+    .ft-col h4{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1.2rem;font-weight:600}
+    .ft-col ul{list-style:none}
+    .ft-col ul li{margin-bottom:.7rem}
+    .ft-col ul li a{color:rgba(255,255,255,.4);font-size:.87rem;transition:color .2s}
+    .ft-col ul li a:hover{color:var(--gold)}
+    .ft-ci{display:flex;align-items:flex-start;gap:10px;margin-bottom:.9rem}
+    .ft-ci i{color:var(--gold);font-size:.8rem;margin-top:3px;flex-shrink:0}
+    .ft-ci a,.ft-ci span{color:rgba(255,255,255,.4);font-size:.87rem;transition:color .2s;line-height:1.5}
+    .ft-ci a:hover{color:#fff}
+    .ft-btm{border-top:1px solid rgba(255,255,255,.06);padding-top:1.5rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+    .ft-btm p{font-size:.75rem;color:rgba(255,255,255,.18)}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:1024px){.hero-inner{grid-template-columns:1fr;gap:3rem;padding-top:9rem}.h-deco{display:none}.why-grid{grid-template-columns:1fr;gap:3rem}.svc-grid{grid-template-columns:1fr 1fr}.stats-grid{grid-template-columns:1fr 1fr}.stat-block{border-right:none;border-bottom:1px solid rgba(255,255,255,.08)}.ft-grid{grid-template-columns:1fr 1fr;gap:2rem}}
+    @media(max-width:768px){.nav-links{display:none}.hamburger{display:block}.svc-grid{grid-template-columns:1fr}.svc-hdr{flex-direction:column;align-items:flex-start}.ft-grid{grid-template-columns:1fr}.ft-btm{flex-direction:column;text-align:center}.clients-inner{flex-direction:column;gap:1rem}.hero-stats{gap:2rem}}
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">
+        <div class="logo-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <div><span class="logo-text">LYNX <span>SÉCURITÉ</span></span><span class="logo-sub">Cybersécurité & Protection</span></div>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="active">Accueil</a>
+        <a href="services.html">Services</a>
+        <a href="cybersecurite.html">Cybersécurité</a>
+        <a href="apropos.html">À Propos</a>
+        <a href="methode.html">Notre Méthode</a>
+        <a href="contact.html" class="nav-cta">Réserver</a>
+      </div>
+      <button class="hamburger" id="hbg"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </div>
+  <div class="mob-nav" id="mobNav">
+    <a href="index.html">Accueil</a>
+    <a href="services.html">Services</a>
+    <a href="cybersecurite.html">Cybersécurité</a>
+    <a href="apropos.html">À Propos</a>
+    <a href="methode.html">Notre Méthode</a>
+    <a href="contact.html">Réserver</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="h-bg"></div><div class="h-ov"></div><div class="h-deco"></div><div class="h-line"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge"><span class="live-dot"></span>Opérationnel 24/7 — Conakry, Guinée</div>
+      <h1 class="ht">Protéger ce qui<br>compte <em>vraiment.</em></h1>
+      <p class="hero-desc">Leader de la sécurité privée et de la cybersécurité en Guinée. Des agents d'élite, des technologies de pointe et une expertise terrain de plus de 12 ans.</p>
+      <div class="hero-btns">
+        <a href="contact.html" class="btn btn-primary"><i class="fa-solid fa-phone"></i>Demander une intervention</a>
+        <a href="https://wa.me/212778455789" class="btn btn-outline-w" target="_blank"><i class="fa-brands fa-whatsapp"></i>WhatsApp</a>
+      </div>
+      <div class="hero-stats">
+        <div><span class="hstat-num counter" data-t="1500">0</span><span class="hstat-lbl">Agents déployés</span></div>
+        <div><span class="hstat-num counter" data-t="12">0</span><span class="hstat-lbl">Années d'expérience</span></div>
+        <div><span class="hstat-num counter" data-t="300">0</span><span class="hstat-lbl">Clients protégés</span></div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="hcard-title">Nos domaines d'intervention</div>
+      <a href="services.html" class="svc-pill"><div class="pill-ico"><i class="fa-solid fa-ticket"></i></div><div class="pill-txt"><strong>Sécurité Événementielle</strong><span>Concerts, conférences, cérémonies</span></div></a>
+      <a href="services.html" class="svc-pill"><div class="pill-ico"><i class="fa-solid fa-user-shield"></i></div><div class="pill-txt"><strong>Protection Rapprochée</strong><span>VIPs, dirigeants, personnalités</span></div></a>
+      <a href="cybersecurite.html" class="svc-pill"><div class="pill-ico"><i class="fa-solid fa-shield-virus"></i></div><div class="pill-txt"><strong>Cybersécurité</strong><span>Audit, pentest, protection des données</span></div></a>
+      <a href="services.html" class="svc-pill"><div class="pill-ico"><i class="fa-solid fa-camera"></i></div><div class="pill-txt"><strong>Surveillance & CCTV</strong><span>Installation, monitoring, analyse</span></div></a>
+      <div class="hcard-cta">
+        <span class="resp-badge">Réponse garantie sous <strong>2h</strong></span>
+        <a href="contact.html" class="btn btn-gold" style="padding:.6rem 1.2rem;font-size:.82rem">Commander <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<div class="clients-bar">
+  <div class="container">
+    <div class="clients-inner">
+      <span class="cli-label">Ils nous font confiance</span>
+      <div class="cli-logos">
+        <span class="cli-logo">MINISTÈRE DE L'INTÉRIEUR</span>
+        <span class="cli-logo">ENTREPRISES MINIÈRES</span>
+        <span class="cli-logo">AMBASSADES</span>
+        <span class="cli-logo">HÔTELLERIE DE LUXE</span>
+        <span class="cli-logo">ONG INTERNATIONALES</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-block reveal"><span class="stat-n"><span class="counter" data-t="1500">1500</span><span class="u">+</span></span><span class="stat-l">Agents certifiés</span></div>
+      <div class="stat-block reveal d1"><span class="stat-n"><span class="counter" data-t="12">12</span><span class="u"> ans</span></span><span class="stat-l">D'expérience terrain</span></div>
+      <div class="stat-block reveal d2"><span class="stat-n"><span class="counter" data-t="300">300</span><span class="u">+</span></span><span class="stat-l">Clients protégés</span></div>
+      <div class="stat-block reveal d3"><span class="stat-n">24<span class="u">/7</span></span><span class="stat-l">Centre opérationnel</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES PREVIEW -->
+<section id="services-preview">
+  <div class="container">
+    <div class="svc-hdr">
+      <div>
+        <span class="section-tag">Nos Solutions</span>
+        <h2 class="section-title">Une protection complète,<br>à chaque niveau.</h2>
+      </div>
+      <a href="services.html" class="btn btn-outline" style="flex-shrink:0">Voir tous les services</a>
+    </div>
+    <div class="svc-grid">
+      <a href="services.html" class="svc-card reveal"><span class="svc-num">01</span><div class="svc-icon"><i class="fa-solid fa-ticket"></i></div><h3>Sécurité Événementielle</h3><p>Agents certifiés pour concerts, conférences et événements privés.</p><i class="fa-solid fa-arrow-up-right svc-arr"></i></a>
+      <a href="services.html" class="svc-card reveal d1"><span class="svc-num">02</span><div class="svc-icon"><i class="fa-solid fa-house-lock"></i></div><h3>Sécurité Résidentielle</h3><p>Protection permanente de villas, résidences et ambassades.</p><i class="fa-solid fa-arrow-up-right svc-arr"></i></a>
+      <a href="services.html" class="svc-card reveal d2"><span class="svc-num">03</span><div class="svc-icon"><i class="fa-solid fa-user-shield"></i></div><h3>Protection Rapprochée</h3><p>Gardes du corps formés aux standards militaires pour VIPs.</p><i class="fa-solid fa-arrow-up-right svc-arr"></i></a>
+      <a href="cybersecurite.html" class="svc-card reveal"><span class="svc-num">04</span><div class="svc-icon"><i class="fa-solid fa-shield-virus"></i></div><h3>Cybersécurité</h3><p>Audit, pentest et protection contre les cyberattaques.</p><i class="fa-solid fa-arrow-up-right svc-arr"></i></a>
+      <a href="services.html" class="svc-card reveal d1"><span class="svc-num">05</span><div class="svc-icon"><i class="fa-solid fa-camera"></i></div><h3>Surveillance & CCTV</h3><p>Installation de systèmes HD et monitoring en temps réel.</p><i class="fa-solid fa-arrow-up-right svc-arr"></i></a>
+      <a href="services.html" class="svc-card reveal d2"><span class="svc-num">06</span><div class="svc-icon"><i class="fa-solid fa-building-shield"></i></div><h3>Sécurité Entreprise</h3><p>Sécurisation de bureaux, banques et sites industriels.</p><i class="fa-solid fa-arrow-up-right svc-arr"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="container">
+    <div class="why-grid">
+      <div class="why-img reveal">
+        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=2069" alt="Équipe LYNX">
+      </div>
+      <div class="reveal d1">
+        <span class="section-tag">Pourquoi LYNX</span>
+        <div class="divider"></div>
+        <h2 class="section-title">L'excellence au cœur de chaque mission.</h2>
+        <ul class="why-list">
+          <li class="why-item"><div class="wi-icon"><i class="fa-solid fa-check"></i></div><div class="wi-t"><strong>Agents issus des forces d'élite</strong><span>Sélectionnés parmi les meilleurs éléments de l'armée et des forces de l'ordre guinéennes.</span></div></li>
+          <li class="why-item"><div class="wi-icon"><i class="fa-solid fa-check"></i></div><div class="wi-t"><strong>Technologie de pointe</strong><span>Systèmes de surveillance HD, communication chiffrée et outils cyber dernière génération.</span></div></li>
+          <li class="why-item"><div class="wi-icon"><i class="fa-solid fa-check"></i></div><div class="wi-t"><strong>Réponse sous 2 heures</strong><span>Centre opérationnel actif 24h/24 pour traiter toute demande d'urgence.</span></div></li>
+          <li class="why-item"><div class="wi-icon"><i class="fa-solid fa-check"></i></div><div class="wi-t"><strong>Agréé par l'État guinéen</strong><span>Certification officielle et conformité totale avec la réglementation nationale.</span></div></li>
+        </ul>
+        <a href="apropos.html" class="btn btn-primary" style="margin-top:2rem">En savoir plus <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band">
+  <div class="container">
+    <h2>Prêt à sécuriser votre environnement ?</h2>
+    <p>Nos experts sont disponibles maintenant pour évaluer vos besoins et déployer une solution adaptée.</p>
+    <div class="cta-btns">
+      <a href="contact.html" class="btn btn-gold"><i class="fa-solid fa-shield-halved"></i>Demander un devis gratuit</a>
+      <a href="https://wa.me/212778455789" class="btn btn-outline-w" target="_blank"><i class="fa-brands fa-whatsapp"></i>Contacter sur WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="ft-grid">
+      <div class="ft-about">
+        <a href="index.html" class="nav-logo"><div class="logo-icon"><i class="fa-solid fa-shield-halved"></i></div><div><span class="logo-text">LYNX <span>SÉCURITÉ</span></span><span class="logo-sub">Cybersécurité & Protection</span></div></a>
+        <p>L'entreprise de référence en sécurité privée et technologique en République de Guinée.</p>
+        <div class="ft-socials">
+          <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://wa.me/212778455789"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="ft-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="cybersecurite.html">Cybersécurité</a></li>
+          <li><a href="apropos.html">À Propos</a></li>
+          <li><a href="methode.html">Notre Méthode</a></li>
+          <li><a href="contact.html">Réserver</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>Contact</h4>
+        <div class="ft-ci"><i class="fa-solid fa-location-dot"></i><span>Lambanyi, Conakry, Guinée</span></div>
+        <div class="ft-ci"><i class="fa-brands fa-whatsapp"></i><a href="https://wa.me/212778455789">+212 778 455 789</a></div>
+        <div class="ft-ci"><i class="fa-solid fa-envelope"></i><a href="mailto:Sidikidiomande00@gmail.com">Sidikidiomande00@gmail.com</a></div>
+      </div>
+    </div>
+    <div class="ft-btm">
+      <p>© 2025 LYNX SÉCURITÉ — Tous droits réservés.</p>
+      <p>Agréé État Guinéen — Opérationnel 24h/24, 7j/7</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const nb=document.getElementById('navbar');
+window.addEventListener('scroll',()=>nb.classList.toggle('scrolled',scrollY>60));
+const hbg=document.getElementById('hbg'),mob=document.getElementById('mobNav');
+hbg.addEventListener('click',()=>{mob.classList.toggle('open');hbg.querySelector('i').className=mob.classList.contains('open')?'fa-solid fa-xmark':'fa-solid fa-bars'});
+document.querySelectorAll('.reveal').forEach(el=>new IntersectionObserver(([e])=>{if(e.isIntersecting)el.classList.add('on')},{threshold:.1}).observe(el));
+let cnt=false;
+new IntersectionObserver(([e])=>{if(e.isIntersecting&&!cnt){cnt=true;document.querySelectorAll('.counter').forEach(el=>{const t=+el.dataset.t;let c=0,inc=t/80;const id=setInterval(()=>{c=Math.min(c+inc,t);el.textContent=Math.floor(c).toLocaleString();if(c>=t)clearInterval(id)},20)})}},{threshold:.3}).observe(document.querySelector('.stats-bar'));
+</script>
+</body>
+</html>

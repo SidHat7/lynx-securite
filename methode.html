@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LYNX SÉCURITÉ — Notre Méthode</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root{--navy:#0B1D3A;--blue:#1D4ED8;--blue-h:#1740B8;--gold:#C9A84C;--gold-l:#E2C47A;--white:#fff;--off:#F7F8FA;--lgray:#EEF1F6;--mgray:#8899B0;--dark:#1A2B42;--body:#4A5E74;--border:#DDE3EC;--sh-md:0 8px 32px rgba(11,29,58,.12);--sh-lg:0 20px 60px rgba(11,29,58,.18)}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',sans-serif;color:var(--body);background:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    a{text-decoration:none}
+    .container{max-width:1200px;margin:0 auto;padding:0 2rem}
+    #navbar{position:fixed;top:0;width:100%;z-index:1000;background:var(--navy);box-shadow:0 2px 24px rgba(0,0,0,.25)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;height:76px}
+    .nav-logo{display:flex;align-items:center;gap:12px}
+    .logo-icon{width:42px;height:42px;background:var(--blue);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .logo-icon i{color:#fff;font-size:1.1rem}
+    .logo-text{font-size:1.1rem;font-weight:700;color:#fff;letter-spacing:.04em}
+    .logo-text span{color:var(--gold)}
+    .logo-sub{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);display:block;margin-top:1px}
+    .nav-links{display:flex;align-items:center;gap:2rem}
+    .nav-links a{font-size:.875rem;font-weight:500;color:rgba(255,255,255,.7);transition:color .2s;position:relative;padding-bottom:4px}
+    .nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--gold);transition:width .25s}
+    .nav-links a:hover,.nav-links a.active{color:#fff}
+    .nav-links a:hover::after,.nav-links a.active::after{width:100%}
+    .nav-cta{padding:.55rem 1.3rem;background:var(--gold);color:var(--navy)!important;font-weight:700!important;border-radius:4px}
+    .nav-cta::after{display:none!important}
+    .nav-cta:hover{background:var(--gold-l)!important}
+    .hamburger{display:none;background:none;border:none;cursor:pointer;color:#fff;font-size:1.4rem}
+    .mob-nav{display:none;flex-direction:column;background:var(--navy);position:absolute;top:100%;width:100%;border-top:1px solid rgba(255,255,255,.08)}
+    .mob-nav.open{display:flex}
+    .mob-nav a{padding:.9rem 2rem;color:rgba(255,255,255,.75);font-weight:500;border-bottom:1px solid rgba(255,255,255,.06);transition:color .2s}
+    .mob-nav a:hover{color:var(--gold)}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:.85rem 2rem;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;border:none;cursor:pointer;border-radius:4px;transition:all .25s}
+    .btn-primary{background:var(--blue);color:#fff}
+    .btn-primary:hover{background:var(--blue-h);box-shadow:0 6px 24px rgba(29,78,216,.35);transform:translateY(-1px)}
+    .btn-gold{background:var(--gold);color:var(--navy)}
+    .btn-gold:hover{background:var(--gold-l);transform:translateY(-1px)}
+    .btn-outline-w{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+    .btn-outline-w:hover{background:rgba(255,255,255,.08)}
+    .section-tag{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:1rem}
+    .section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:700;color:var(--dark);line-height:1.2;margin-bottom:1rem}
+    .section-title-w{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:700;color:#fff;line-height:1.2;margin-bottom:1rem}
+    .divider{width:48px;height:3px;background:var(--gold);margin-bottom:1.5rem;border-radius:2px}
+    .reveal{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
+    .reveal.on{opacity:1;transform:none}
+    .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+    .page-header{padding:7rem 0 4rem;background:var(--navy);position:relative;overflow:hidden}
+    .page-header::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070') center/cover;opacity:.06}
+    .page-header::after{content:'';position:absolute;left:0;top:0;width:4px;height:100%;background:linear-gradient(180deg,transparent,var(--gold) 30%,var(--gold) 70%,transparent)}
+    .ph-inner{position:relative;z-index:1}
+    .breadcrumb{display:flex;align-items:center;gap:8px;font-size:.78rem;color:rgba(255,255,255,.4);margin-bottom:1.5rem}
+    .breadcrumb a{color:rgba(255,255,255,.4);transition:color .2s}
+    .breadcrumb a:hover{color:var(--gold)}
+    .breadcrumb i{font-size:.6rem}
+    .breadcrumb span{color:var(--gold)}
+    .ph-title{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4vw,3.5rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:1rem}
+    .ph-title em{font-style:normal;color:var(--gold)}
+    .ph-desc{font-size:1rem;color:rgba(255,255,255,.55);max-width:560px;line-height:1.8}
+
+    /* BIG STEPS */
+    #steps{padding:5rem 0;background:var(--white)}
+    .steps-list{display:flex;flex-direction:column;gap:0}
+    .step-block{display:grid;grid-template-columns:200px 1fr;gap:0;border-bottom:1px solid var(--border);transition:background .3s}
+    .step-block:last-child{border-bottom:none}
+    .step-block:hover{background:var(--off)}
+    .step-left{padding:3rem;border-right:1px solid var(--border);display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start}
+    .step-circle{width:64px;height:64px;border-radius:50%;background:var(--blue);color:#fff;font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;box-shadow:0 4px 16px rgba(29,78,216,.3)}
+    .step-duration{font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--mgray)}
+    .step-right{padding:3rem}
+    .step-right h2{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--dark);margin-bottom:.8rem}
+    .step-right>p{font-size:.95rem;line-height:1.85;color:var(--body);margin-bottom:1.5rem;max-width:620px}
+    .step-details{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .sd-item{background:var(--lgray);border-radius:6px;padding:1rem 1.2rem}
+    .sd-item strong{display:block;font-size:.85rem;font-weight:600;color:var(--dark);margin-bottom:.2rem}
+    .sd-item span{font-size:.8rem;color:var(--body)}
+
+    /* PRINCIPLES */
+    #principles{padding:5rem 0;background:var(--navy)}
+    .princ-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+    .princ-img{border-radius:6px;overflow:hidden;box-shadow:var(--sh-lg)}
+    .princ-img img{width:100%;filter:brightness(.7) grayscale(30%);display:block;transition:filter .5s}
+    .princ-img:hover img{filter:brightness(.9) grayscale(0%)}
+    .princ-list{list-style:none;margin-top:1.5rem}
+    .princ-item{display:flex;gap:14px;align-items:flex-start;padding:1rem 0;border-bottom:1px solid rgba(255,255,255,.08)}
+    .princ-item:first-child{border-top:1px solid rgba(255,255,255,.08)}
+    .pi-icon{width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.85rem}
+    .pi-t strong{display:block;font-size:.92rem;font-weight:600;color:#fff;margin-bottom:2px}
+    .pi-t span{font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.5}
+
+    /* GUARANTEE */
+    #guarantee{padding:5rem 0;background:var(--off);border-top:1px solid var(--border)}
+    .guar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+    .guar-card{background:#fff;border:1.5px solid var(--border);border-radius:8px;padding:2rem;text-align:center;transition:all .3s}
+    .guar-card:hover{border-color:var(--gold);box-shadow:var(--sh-md);transform:translateY(-4px)}
+    .guar-ico{font-size:2rem;color:var(--gold);margin-bottom:1rem}
+    .guar-card h3{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--dark);margin-bottom:.5rem}
+    .guar-card p{font-size:.85rem;line-height:1.7;color:var(--body)}
+
+    /* FAQ */
+    #faq{padding:5rem 0;background:var(--white)}
+    .faq-list{max-width:760px;margin:3rem auto 0}
+    .faq-item{border-bottom:1px solid var(--border)}
+    .faq-q{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 0;cursor:pointer;font-weight:600;font-size:.95rem;color:var(--dark);transition:color .2s;gap:1rem}
+    .faq-q:hover{color:var(--blue)}
+    .faq-q i{font-size:.8rem;color:var(--mgray);transition:transform .3s;flex-shrink:0}
+    .faq-item.open .faq-q i{transform:rotate(180deg);color:var(--blue)}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s}
+    .faq-item.open .faq-a{max-height:200px;padding-bottom:1.2rem}
+    .faq-a p{font-size:.9rem;line-height:1.8;color:var(--body)}
+
+    /* CTA */
+    .cta-band{background:var(--navy);padding:5rem 0;text-align:center;position:relative;overflow:hidden}
+    .cta-band::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(29,78,216,.15),transparent 60%)}
+    .cta-band h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);color:#fff;margin-bottom:1rem;position:relative}
+    .cta-band p{color:rgba(255,255,255,.5);max-width:480px;margin:0 auto 2.5rem;position:relative}
+    .cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative}
+
+    footer{background:#070E1C;padding:4rem 0 2rem}
+    .ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:4rem;margin-bottom:3rem}
+    .ft-about p{font-size:.88rem;line-height:1.8;color:rgba(255,255,255,.3);margin:1rem 0 1.5rem;max-width:280px}
+    .ft-socials{display:flex;gap:.6rem}
+    .ft-socials a{width:34px;height:34px;border:1px solid rgba(255,255,255,.1);border-radius:4px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.3);font-size:.85rem;transition:all .2s}
+    .ft-socials a:hover{border-color:var(--gold);color:var(--gold)}
+    .ft-col h4{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1.2rem;font-weight:600}
+    .ft-col ul{list-style:none}
+    .ft-col ul li{margin-bottom:.7rem}
+    .ft-col ul li a{color:rgba(255,255,255,.4);font-size:.87rem;transition:color .2s}
+    .ft-col ul li a:hover{color:var(--gold)}
+    .ft-ci{display:flex;align-items:flex-start;gap:10px;margin-bottom:.9rem}
+    .ft-ci i{color:var(--gold);font-size:.8rem;margin-top:3px;flex-shrink:0}
+    .ft-ci a,.ft-ci span{color:rgba(255,255,255,.4);font-size:.87rem;transition:color .2s;line-height:1.5}
+    .ft-ci a:hover{color:#fff}
+    .ft-btm{border-top:1px solid rgba(255,255,255,.06);padding-top:1.5rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+    .ft-btm p{font-size:.75rem;color:rgba(255,255,255,.18)}
+
+    @media(max-width:1024px){.step-block{grid-template-columns:1fr}.step-left{border-right:none;border-bottom:1px solid var(--border);padding:2rem}.princ-grid{grid-template-columns:1fr;gap:3rem}.guar-grid{grid-template-columns:1fr 1fr}.ft-grid{grid-template-columns:1fr 1fr;gap:2rem}}
+    @media(max-width:768px){.nav-links{display:none}.hamburger{display:block}.step-details{grid-template-columns:1fr}.guar-grid{grid-template-columns:1fr}.ft-grid{grid-template-columns:1fr}.ft-btm{flex-direction:column;text-align:center}}
+  </style>
+</head>
+<body>
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html"><div class="logo-icon"><i class="fa-solid fa-shield-halved"></i></div><div><span class="logo-text">LYNX <span>SÉCURITÉ</span></span><span class="logo-sub">Cybersécurité & Protection</span></div></a>
+      <div class="nav-links">
+        <a href="index.html">Accueil</a><a href="services.html">Services</a><a href="cybersecurite.html">Cybersécurité</a><a href="apropos.html">À Propos</a><a href="methode.html" class="active">Notre Méthode</a><a href="contact.html" class="nav-cta">Réserver</a>
+      </div>
+      <button class="hamburger" id="hbg"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </div>
+  <div class="mob-nav" id="mobNav"><a href="index.html">Accueil</a><a href="services.html">Services</a><a href="cybersecurite.html">Cybersécurité</a><a href="apropos.html">À Propos</a><a href="methode.html">Notre Méthode</a><a href="contact.html">Réserver</a></div>
+</nav>
+
+<div class="page-header">
+  <div class="container ph-inner">
+    <div class="breadcrumb"><a href="index.html">Accueil</a><i class="fa-solid fa-chevron-right"></i><span>Notre Méthode</span></div>
+    <h1 class="ph-title">Notre <em>Méthode</em></h1>
+    <p class="ph-desc">Un processus éprouvé en 4 étapes, conçu pour garantir une protection maximale dès le premier jour d'intervention.</p>
+  </div>
+</div>
+
+<!-- STEPS -->
+<section id="steps">
+  <div class="container">
+    <div style="margin-bottom:3rem">
+      <span class="section-tag">Le Processus</span>
+      <div class="divider"></div>
+      <h2 class="section-title">De la demande au déploiement,<br>sans friction.</h2>
+    </div>
+    <div class="steps-list">
+      <div class="step-block reveal">
+        <div class="step-left">
+          <div class="step-circle">01</div>
+          <div class="step-duration"><i class="fa-regular fa-clock" style="margin-right:4px"></i>Jour 1</div>
+        </div>
+        <div class="step-right">
+          <h2><i class="fa-solid fa-magnifying-glass" style="color:var(--blue);margin-right:10px;font-size:1.2rem"></i>Analyse des risques</h2>
+          <p>Dès réception de votre demande, un expert LYNX se déplace ou vous contacte pour conduire une évaluation approfondie de votre environnement, de vos vulnérabilités et de vos objectifs de protection.</p>
+          <div class="step-details">
+            <div class="sd-item"><strong>Évaluation terrain</strong><span>Visite physique de vos locaux et analyse du périmètre</span></div>
+            <div class="sd-item"><strong>Analyse des menaces</strong><span>Identification des risques spécifiques à votre secteur</span></div>
+            <div class="sd-item"><strong>Entretien client</strong><span>Recueil de vos contraintes, priorités et budget</span></div>
+            <div class="sd-item"><strong>Rapport d'évaluation</strong><span>Remise d'un rapport confidentiel sous 24h</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="step-block reveal">
+        <div class="step-left">
+          <div class="step-circle">02</div>
+          <div class="step-duration"><i class="fa-regular fa-clock" style="margin-right:4px"></i>Jours 2-3</div>
+        </div>
+        <div class="step-right">
+          <h2><i class="fa-solid fa-file-contract" style="color:var(--blue);margin-right:10px;font-size:1.2rem"></i>Plan de sécurité sur-mesure</h2>
+          <p>Sur la base de l'évaluation, notre équipe conçoit un dispositif de sécurité entièrement adapté à votre profil de risque, votre budget et vos contraintes opérationnelles.</p>
+          <div class="step-details">
+            <div class="sd-item"><strong>Protocole personnalisé</strong><span>Procédures et consignes adaptées à votre contexte</span></div>
+            <div class="sd-item"><strong>Sélection des agents</strong><span>Affectation des profils les plus adaptés à votre mission</span></div>
+            <div class="sd-item"><strong>Choix technologique</strong><span>Sélection du matériel CCTV, alarmes et outils cyber</span></div>
+            <div class="sd-item"><strong>Proposition chiffrée</strong><span>Devis transparent et sans frais cachés</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="step-block reveal">
+        <div class="step-left">
+          <div class="step-circle">03</div>
+          <div class="step-duration"><i class="fa-regular fa-clock" style="margin-right:4px"></i>Dès 2h</div>
+        </div>
+        <div class="step-right">
+          <h2><i class="fa-solid fa-rocket" style="color:var(--blue);margin-right:10px;font-size:1.2rem"></i>Déploiement rapide</h2>
+          <p>Une fois le plan validé et signé, nos agents et systèmes sont déployés dans les délais convenus — jusqu'à 2 heures pour les urgences. Zéro délai administratif, zéro surprise.</p>
+          <div class="step-details">
+            <div class="sd-item"><strong>Briefing pré-mission</strong><span>Réunion de coordination avec l'équipe terrain</span></div>
+            <div class="sd-item"><strong>Installation technique</strong><span>Pose des équipements CCTV, alarmes et accès sécurisé</span></div>
+            <div class="sd-item"><strong>Prise de poste</strong><span>Agents en position dans les délais contractuels</span></div>
+            <div class="sd-item"><strong>Test du dispositif</strong><span>Vérification complète du système avant activation</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="step-block reveal">
+        <div class="step-left">
+          <div class="step-circle">04</div>
+          <div class="step-duration"><i class="fa-regular fa-clock" style="margin-right:4px"></i>En continu</div>
+        </div>
+        <div class="step-right">
+          <h2><i class="fa-solid fa-chart-line" style="color:var(--blue);margin-right:10px;font-size:1.2rem"></i>Monitoring & amélioration continue</h2>
+          <p>La sécurité n'est jamais un état figé. Notre équipe analyse en permanence l'efficacité du dispositif et l'améliore en fonction des évolutions de la menace et de votre activité.</p>
+          <div class="step-details">
+            <div class="sd-item"><strong>Rapports hebdomadaires</strong><span>Compte-rendu détaillé de toutes les interventions</span></div>
+            <div class="sd-item"><strong>Hotline dédiée 24/7</strong><span>Numéro direct pour joindre votre agent responsable</span></div>
+            <div class="sd-item"><strong>Révision mensuelle</strong><span>Ajustement du dispositif selon les retours terrain</span></div>
+            <div class="sd-item"><strong>Formation continue</strong><span>Mise à niveau des agents sur les nouvelles procédures</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRINCIPLES -->
+<section id="principles">
+  <div class="container">
+    <div class="princ-grid">
+      <div class="princ-img reveal">
+        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070" alt="Notre approche">
+      </div>
+      <div class="reveal d1">
+        <span class="section-tag" style="color:var(--gold-l)">Nos Principes</span>
+        <div class="divider"></div>
+        <h2 class="section-title-w">Une philosophie de sécurité proactive.</h2>
+        <ul class="princ-list">
+          <li class="princ-item"><div class="pi-icon" style="background:rgba(201,168,76,.15)"><i class="fa-solid fa-eye" style="color:var(--gold-l)"></i></div><div class="pi-t"><strong>Anticipation plutôt que réaction</strong><span>Nous identifions les menaces avant qu'elles ne se concrétisent, grâce à une veille permanente et une analyse prédictive.</span></div></li>
+          <li class="princ-item"><div class="pi-icon" style="background:rgba(29,78,216,.2)"><i class="fa-solid fa-sliders" style="color:#60A5FA"></i></div><div class="pi-t"><strong>Personnalisation totale</strong><span>Chaque client a un profil de risque unique. Nos solutions s'adaptent, jamais le contraire.</span></div></li>
+          <li class="princ-item"><div class="pi-icon" style="background:rgba(52,211,153,.15)"><i class="fa-solid fa-comments" style="color:#34D399"></i></div><div class="pi-t"><strong>Transparence totale</strong><span>Vous êtes informé en temps réel de tout incident, toute décision et tout changement dans votre dispositif.</span></div></li>
+          <li class="princ-item"><div class="pi-icon" style="background:rgba(201,168,76,.15)"><i class="fa-solid fa-rotate" style="color:var(--gold-l)"></i></div><div class="pi-t"><strong>Amélioration continue</strong><span>Chaque mission génère des données qui améliorent nos protocoles. Nous apprenons de chaque expérience.</span></div></li>
+        </ul>
+        <a href="contact.html" class="btn btn-gold" style="margin-top:1.5rem"><i class="fa-solid fa-phone"></i>Démarrer maintenant</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GUARANTEES -->
+<section id="guarantee">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:1rem">
+      <span class="section-tag">Nos Engagements</span>
+      <div class="divider" style="margin:1rem auto 0"></div>
+      <h2 class="section-title" style="margin-top:.5rem">Ce que nous vous garantissons</h2>
+    </div>
+    <div class="guar-grid">
+      <div class="guar-card reveal"><div class="guar-ico"><i class="fa-solid fa-bolt"></i></div><h3>Réponse en 2h</h3><p>Pour toute urgence sécuritaire, nos agents sont sur place dans un délai maximum de 2 heures, partout à Conakry.</p></div>
+      <div class="guar-card reveal d1"><div class="guar-ico"><i class="fa-solid fa-lock"></i></div><h3>Confidentialité absolue</h3><p>Toutes les informations concernant votre sécurité sont traitées sous accord de confidentialité strict. Rien ne filtre.</p></div>
+      <div class="guar-card reveal d2"><div class="guar-ico"><i class="fa-solid fa-thumbs-up"></i></div><h3>Satisfaction garantie</h3><p>Si vous n'êtes pas satisfait après le premier mois, nous révisons intégralement le dispositif sans frais supplémentaires.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:1rem">
+      <span class="section-tag">Questions Fréquentes</span>
+      <div class="divider" style="margin:1rem auto 0"></div>
+      <h2 class="section-title" style="margin-top:.5rem">Vous avez des questions ?</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item"><div class="faq-q">Combien de temps faut-il pour déployer un dispositif complet ?<i class="fa-solid fa-chevron-down"></i></div><div class="faq-a"><p>Pour les urgences, nos agents peuvent être sur place en 2 heures. Pour un dispositif complet (CCTV + agents + cyber), comptez 3 à 5 jours ouvrés, le temps de l'évaluation, de la planification et de l'installation des équipements.</p></div></div>
+      <div class="faq-item"><div class="faq-q">Proposez-vous des contrats à long terme uniquement ?<i class="fa-solid fa-chevron-down"></i></div><div class="faq-a"><p>Non, nous proposons des prestations ponctuelles (à la vacation pour les événements), des contrats mensuels et des engagements annuels. La formule la plus adaptée est définie lors de l'évaluation initiale.</p></div></div>
+      <div class="faq-item"><div class="faq-q">Vos agents sont-ils armés ?<i class="fa-solid fa-chevron-down"></i></div><div class="faq-a"><p>Certains de nos agents sont habilités à être armés, conformément à la réglementation guinéenne. La présence d'agents armés est définie selon le niveau de risque évalué et uniquement avec votre accord explicite.</p></div></div>
+      <div class="faq-item"><div class="faq-q">Intervenez-vous en dehors de Conakry ?<i class="fa-solid fa-chevron-down"></i></div><div class="faq-a"><p>Oui, nous opérons dans 6 villes guinéennes et pouvons intervenir sur l'ensemble du territoire national avec un délai de déploiement légèrement supérieur selon la localisation.</p></div></div>
+      <div class="faq-item"><div class="faq-q">Comment sont formés vos agents ?<i class="fa-solid fa-chevron-down"></i></div><div class="faq-a"><p>Nos agents sont recrutés parmi d'anciens militaires, policiers et gendarmes. Ils suivent ensuite une formation interne de 3 semaines couvrant les protocoles LYNX, la gestion de crise, les premiers secours et le service client.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band">
+  <div class="container">
+    <h2>Prêt à lancer votre évaluation sécurité ?</h2>
+    <p>L'analyse initiale est gratuite et sans engagement. Nos experts se déplacent chez vous sous 24 heures.</p>
+    <div class="cta-btns">
+      <a href="contact.html" class="btn btn-gold"><i class="fa-solid fa-shield-halved"></i>Démarrer l'évaluation</a>
+      <a href="https://wa.me/212778455789" class="btn btn-outline-w" target="_blank"><i class="fa-brands fa-whatsapp"></i>WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="ft-grid">
+      <div class="ft-about"><a href="index.html" class="nav-logo"><div class="logo-icon"><i class="fa-solid fa-shield-halved"></i></div><div><span class="logo-text">LYNX <span>SÉCURITÉ</span></span><span class="logo-sub">Cybersécurité & Protection</span></div></a><p>L'entreprise de référence en sécurité privée et technologique en République de Guinée.</p><div class="ft-socials"><a href="#"><i class="fa-brands fa-facebook-f"></i></a><a href="#"><i class="fa-brands fa-linkedin-in"></i></a><a href="#"><i class="fa-brands fa-instagram"></i></a><a href="https://wa.me/212778455789"><i class="fa-brands fa-whatsapp"></i></a></div></div>
+      <div class="ft-col"><h4>Navigation</h4><ul><li><a href="index.html">Accueil</a></li><li><a href="services.html">Services</a></li><li><a href="cybersecurite.html">Cybersécurité</a></li><li><a href="apropos.html">À Propos</a></li><li><a href="methode.html">Notre Méthode</a></li><li><a href="contact.html">Réserver</a></li></ul></div>
+      <div class="ft-col"><h4>Contact</h4><div class="ft-ci"><i class="fa-solid fa-location-dot"></i><span>Lambanyi, Conakry, Guinée</span></div><div class="ft-ci"><i class="fa-brands fa-whatsapp"></i><a href="https://wa.me/212778455789">+212 778 455 789</a></div><div class="ft-ci"><i class="fa-solid fa-envelope"></i><a href="mailto:Sidikidiomande00@gmail.com">Sidikidiomande00@gmail.com</a></div></div>
+    </div>
+    <div class="ft-btm"><p>© 2025 LYNX SÉCURITÉ — Tous droits réservés.</p><p>Agréé État Guinéen — Opérationnel 24h/24, 7j/7</p></div>
+  </div>
+</footer>
+<script>
+const hbg=document.getElementById('hbg'),mob=document.getElementById('mobNav');
+hbg.addEventListener('click',()=>{mob.classList.toggle('open');hbg.querySelector('i').className=mob.classList.contains('open')?'fa-solid fa-xmark':'fa-solid fa-bars'});
+document.querySelectorAll('.reveal').forEach(el=>new IntersectionObserver(([e])=>{if(e.isIntersecting)el.classList.add('on')},{threshold:.1}).observe(el));
+document.querySelectorAll('.faq-item').forEach(item=>{item.querySelector('.faq-q').addEventListener('click',()=>{item.classList.toggle('open')})});
+</script>
+</body>
+</html>

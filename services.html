@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LYNX SÉCURITÉ — Services</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root{--navy:#0B1D3A;--blue:#1D4ED8;--blue-h:#1740B8;--gold:#C9A84C;--gold-l:#E2C47A;--white:#fff;--off:#F7F8FA;--lgray:#EEF1F6;--mgray:#8899B0;--dark:#1A2B42;--body:#4A5E74;--border:#DDE3EC;--sh-sm:0 2px 8px rgba(11,29,58,.08);--sh-md:0 8px 32px rgba(11,29,58,.12);--sh-lg:0 20px 60px rgba(11,29,58,.18)}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',sans-serif;color:var(--body);background:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    a{text-decoration:none}
+    .container{max-width:1200px;margin:0 auto;padding:0 2rem}
+    /* NAV */
+    #navbar{position:fixed;top:0;width:100%;z-index:1000;background:var(--navy);box-shadow:0 2px 24px rgba(0,0,0,.25);transition:box-shadow .3s}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;height:76px}
+    .nav-logo{display:flex;align-items:center;gap:12px}
+    .logo-icon{width:42px;height:42px;background:var(--blue);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .logo-icon i{color:#fff;font-size:1.1rem}
+    .logo-text{font-size:1.1rem;font-weight:700;color:#fff;letter-spacing:.04em}
+    .logo-text span{color:var(--gold)}
+    .logo-sub{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);display:block;margin-top:1px}
+    .nav-links{display:flex;align-items:center;gap:2rem}
+    .nav-links a{font-size:.875rem;font-weight:500;color:rgba(255,255,255,.7);transition:color .2s;position:relative;padding-bottom:4px}
+    .nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--gold);transition:width .25s}
+    .nav-links a:hover,.nav-links a.active{color:#fff}
+    .nav-links a:hover::after,.nav-links a.active::after{width:100%}
+    .nav-cta{padding:.55rem 1.3rem;background:var(--gold);color:var(--navy)!important;font-weight:700!important;border-radius:4px;transition:background .25s!important}
+    .nav-cta::after{display:none!important}
+    .nav-cta:hover{background:var(--gold-l)!important}
+    .hamburger{display:none;background:none;border:none;cursor:pointer;color:#fff;font-size:1.4rem}
+    .mob-nav{display:none;flex-direction:column;background:var(--navy);position:absolute;top:100%;width:100%;border-top:1px solid rgba(255,255,255,.08)}
+    .mob-nav.open{display:flex}
+    .mob-nav a{padding:.9rem 2rem;color:rgba(255,255,255,.75);font-weight:500;border-bottom:1px solid rgba(255,255,255,.06);transition:color .2s}
+    .mob-nav a:hover{color:var(--gold)}
+    /* BUTTONS */
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:.85rem 2rem;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;border:none;cursor:pointer;border-radius:4px;transition:all .25s}
+    .btn-primary{background:var(--blue);color:#fff}
+    .btn-primary:hover{background:var(--blue-h);box-shadow:0 6px 24px rgba(29,78,216,.35);transform:translateY(-1px)}
+    .btn-gold{background:var(--gold);color:var(--navy)}
+    .btn-gold:hover{background:var(--gold-l);box-shadow:0 6px 24px rgba(201,168,76,.35);transform:translateY(-1px)}
+    .btn-outline-w{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+    .btn-outline-w:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.8)}
+    /* COMMONS */
+    .section-tag{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:1rem}
+    .section-tag-w{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-l);margin-bottom:1rem}
+    .section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:700;color:var(--dark);line-height:1.2;margin-bottom:1rem}
+    .section-title-w{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:700;color:#fff;line-height:1.2;margin-bottom:1rem}
+    .divider{width:48px;height:3px;background:var(--gold);margin-bottom:1.5rem;border-radius:2px}
+    .reveal{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
+    .reveal.on{opacity:1;transform:none}
+    .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+    /* PAGE HEADER */
+    .page-header{padding:7rem 0 4rem;background:var(--navy);position:relative;overflow:hidden}
+    .page-header::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=2069') center/cover;opacity:.06}
+    .page-header::after{content:'';position:absolute;left:0;top:0;width:4px;height:100%;background:linear-gradient(180deg,transparent,var(--gold) 30%,var(--gold) 70%,transparent)}
+    .ph-inner{position:relative;z-index:1}
+    .breadcrumb{display:flex;align-items:center;gap:8px;font-size:.78rem;color:rgba(255,255,255,.4);margin-bottom:1.5rem}
+    .breadcrumb a{color:rgba(255,255,255,.4);transition:color .2s}
+    .breadcrumb a:hover{color:var(--gold)}
+    .breadcrumb i{font-size:.6rem}
+    .breadcrumb span{color:var(--gold)}
+    .ph-title{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4vw,3.5rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:1rem}
+    .ph-title em{font-style:normal;color:var(--gold)}
+    .ph-desc{font-size:1rem;color:rgba(255,255,255,.55);max-width:560px;line-height:1.8}
+
+    /* SERVICE CARDS */
+    #all-services{padding:5rem 0;background:var(--white)}
+    .services-list{display:flex;flex-direction:column;gap:0}
+    .svc-row{display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid var(--border)}
+    .svc-row:last-child{border-bottom:none}
+    .svc-row.reverse .svc-img{order:2}
+    .svc-row.reverse .svc-info{order:1}
+    .svc-img{position:relative;overflow:hidden;min-height:340px}
+    .svc-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.85);transition:transform .6s ease,filter .4s}
+    .svc-img:hover img{transform:scale(1.04);filter:brightness(1)}
+    .svc-img-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(11,29,58,.5),transparent)}
+    .svc-num-big{position:absolute;bottom:1.5rem;left:1.5rem;font-family:'Playfair Display',serif;font-size:5rem;font-weight:900;color:rgba(255,255,255,.12);line-height:1;pointer-events:none}
+    .svc-info{padding:3.5rem;display:flex;flex-direction:column;justify-content:center;border-left:1px solid var(--border)}
+    .svc-row.reverse .svc-info{border-left:none;border-right:1px solid var(--border)}
+    .svc-icon-wrap{width:52px;height:52px;background:rgba(29,78,216,.08);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:var(--blue);margin-bottom:1.5rem}
+    .svc-info h2{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:700;color:var(--dark);margin-bottom:.8rem;line-height:1.2}
+    .svc-info p{font-size:.92rem;line-height:1.8;color:var(--body);margin-bottom:1.5rem}
+    .svc-features{list-style:none;margin-bottom:2rem}
+    .svc-features li{display:flex;align-items:center;gap:8px;font-size:.86rem;color:var(--dark);padding:.35rem 0;border-bottom:1px solid var(--lgray)}
+    .svc-features li:last-child{border-bottom:none}
+    .svc-features li i{color:var(--blue);font-size:.7rem;flex-shrink:0}
+    .svc-tag{display:inline-flex;align-items:center;gap:6px;background:var(--lgray);color:var(--mgray);font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .7rem;border-radius:2px;margin-bottom:1.5rem}
+
+    /* PRICING BAND */
+    #pricing{padding:5rem 0;background:var(--off);border-top:1px solid var(--border)}
+    .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+    .price-card{background:var(--white);border:1.5px solid var(--border);border-radius:8px;padding:2.5rem;transition:all .3s;position:relative;overflow:hidden}
+    .price-card.featured{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue),var(--sh-lg)}
+    .price-card:hover{transform:translateY(-4px);box-shadow:var(--sh-lg)}
+    .price-badge{position:absolute;top:1.2rem;right:1.2rem;background:var(--blue);color:#fff;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .6rem;border-radius:2px}
+    .price-tier{font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--mgray);margin-bottom:.8rem}
+    .price-card h3{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--dark);margin-bottom:.5rem}
+    .price-card p{font-size:.85rem;color:var(--body);margin-bottom:1.5rem;line-height:1.6}
+    .price-incl{list-style:none;margin-bottom:2rem}
+    .price-incl li{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--dark);padding:.4rem 0;border-bottom:1px solid var(--lgray)}
+    .price-incl li i{color:var(--blue);font-size:.65rem}
+    .price-card .btn{width:100%;justify-content:center}
+
+    /* CTA BAND */
+    .cta-band{background:var(--navy);padding:5rem 0;text-align:center;position:relative;overflow:hidden}
+    .cta-band::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(29,78,216,.15),transparent 60%)}
+    .cta-band h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);color:#fff;margin-bottom:1rem;position:relative}
+    .cta-band p{color:rgba(255,255,255,.5);max-width:480px;margin:0 auto 2.5rem;position:relative}
+    .cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative}
+
+    /* FOOTER */
+    footer{background:#070E1C;padding:4rem 0 2rem}
+    .ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:4rem;margin-bottom:3rem}
+    .ft-about p{font-size:.88rem;line-height:1.8;color:rgba(255,255,255,.3);margin:1rem 0 1.5rem;max-width:280px}
+    .ft-socials{display:flex;gap:.6rem}
+    .ft-socials a{width:34px;height:34px;border:1px solid rgba(255,255,255,.1);border-radius:4px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.3);font-size:.85rem;transition:all .2s}
+    .ft-socials a:hover{border-color:var(--gold);color:var(--gold)}
+    .ft-col h4{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1.2rem;font-weight:600}
+    .ft-col ul{list-style:none}
+    .ft-col ul li{margin-bottom:.7rem}
+    .ft-col ul li a{color:rgba(255,255,255,.4);font-size:.87rem;transition:color .2s}
+    .ft-col ul li a:hover{color:var(--gold)}
+    .ft-ci{display:flex;align-items:flex-start;gap:10px;margin-bottom:.9rem}
+    .ft-ci i{color:var(--gold);font-size:.8rem;margin-top:3px;flex-shrink:0}
+    .ft-ci a,.ft-ci span{color:rgba(255,255,255,.4);font-size:.87rem;transition:color .2s;line-height:1.5}
+    .ft-ci a:hover{color:#fff}
+    .ft-btm{border-top:1px solid rgba(255,255,255,.06);padding-top:1.5rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+    .ft-btm p{font-size:.75rem;color:rgba(255,255,255,.18)}
+
+    @media(max-width:1024px){.svc-row{grid-template-columns:1fr}.svc-img{min-height:260px}.svc-row.reverse .svc-img{order:0}.svc-row.reverse .svc-info{order:0;border-right:none}.svc-info{border-left:none;border-top:1px solid var(--border)}.pricing-grid{grid-template-columns:1fr 1fr}.ft-grid{grid-template-columns:1fr 1fr;gap:2rem}}
+    @media(max-width:768px){.nav-links{display:none}.hamburger{display:block}.pricing-grid{grid-template-columns:1fr}.ft-grid{grid-template-columns:1fr}.ft-btm{flex-direction:column;text-align:center}}
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">
+        <div class="logo-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <div><span class="logo-text">LYNX <span>SÉCURITÉ</span></span><span class="logo-sub">Cybersécurité & Protection</span></div>
+      </a>
+      <div class="nav-links">
+        <a href="index.html">Accueil</a>
+        <a href="services.html" class="active">Services</a>
+        <a href="cybersecurite.html">Cybersécurité</a>
+        <a href="apropos.html">À Propos</a>
+        <a href="methode.html">Notre Méthode</a>
+        <a href="contact.html" class="nav-cta">Réserver</a>
+      </div>
+      <button class="hamburger" id="hbg"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </div>
+  <div class="mob-nav" id="mobNav">
+    <a href="index.html">Accueil</a><a href="services.html">Services</a><a href="cybersecurite.html">Cybersécurité</a><a href="apropos.html">À Propos</a><a href="methode.html">Notre Méthode</a><a href="contact.html">Réserver</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="container ph-inner">
+    <div class="breadcrumb"><a href="index.html">Accueil</a><i class="fa-solid fa-chevron-right"></i><span>Services</span></div>
+    <h1 class="ph-title">Nos <em>Services</em></h1>
+    <p class="ph-desc">Une gamme complète de solutions de sécurité physique et numérique, adaptées à chaque profil de risque et chaque budget.</p>
+  </div>
+</div>
+
+<!-- ALL SERVICES -->
+<section id="all-services">
+  <div class="container">
+    <div class="services-list">
+
+      <!-- 01 Événementielle -->
+      <div class="svc-row reveal">
+        <div class="svc-img">
+          <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=2070" alt="Sécurité Événementielle">
+          <div class="svc-img-overlay"></div>
+          <span class="svc-num-big">01</span>
+        </div>
+        <div class="svc-info">
+          <div class="svc-tag"><i class="fa-solid fa-circle" style="font-size:.4rem;color:var(--blue)"></i>Déploiement Rapide</div>
+          <div class="svc-icon-wrap"><i class="fa-solid fa-ticket"></i></div>
+          <h2>Sécurité Événementielle</h2>
+          <p>De la conférence d'entreprise au concert de grande envergure, nos agents certifiés assurent la sécurité de chaque participant et la fluidité de votre événement.</p>
+          <ul class="svc-features">
+            <li><i class="fa-solid fa-check"></i>Gestion des foules et contrôle d'accès</li>
+            <li><i class="fa-solid fa-check"></i>Agents en tenue ou en civil selon le besoin</li>
+            <li><i class="fa-solid fa-check"></i>Coordination avec les autorités locales</li>
+            <li><i class="fa-solid fa-check"></i>Plan d'évacuation et gestion de crise</li>
+            <li><i class="fa-solid fa-check"></i>Briefing pré-événement personnalisé</li>
+          </ul>
+          <a href="contact.html?service=Sécurité Événementielle" class="btn btn-primary" style="align-self:flex-start">Demander un devis <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- 02 Résidentielle -->
+      <div class="svc-row reverse reveal">
+        <div class="svc-img">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=2086" alt="Sécurité Résidentielle">
+          <div class="svc-img-overlay"></div>
+          <span class="svc-num-big">02</span>
+        </div>
+        <div class="svc-info">
+          <div class="svc-tag"><i class="fa-solid fa-circle" style="font-size:.4rem;color:var(--blue)"></i>Contrat 24/7</div>
+          <div class="svc-icon-wrap"><i class="fa-solid fa-house-lock"></i></div>
+          <h2>Sécurité Résidentielle</h2>
+          <p>Protégez votre famille et votre propriété avec nos agents résidentiels formés aux protocoles de sécurité les plus exigeants. Surveillance continue, jour et nuit.</p>
+          <ul class="svc-features">
+            <li><i class="fa-solid fa-check"></i>Gardiennage 24h/24 et 7j/7</li>
+            <li><i class="fa-solid fa-check"></i>Rondes nocturnes planifiées et aléatoires</li>
+            <li><i class="fa-solid fa-check"></i>Contrôle d'accès des visiteurs</li>
+            <li><i class="fa-solid fa-check"></i>Agents armés sur demande</li>
+            <li><i class="fa-solid fa-check"></i>Rapport d'activité journalier</li>
+          </ul>
+          <a href="contact.html?service=Sécurité Résidentielle" class="btn btn-primary" style="align-self:flex-start">Demander un devis <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- 03 Protection Rapprochée -->
+      <div class="svc-row reveal">
+        <div class="svc-img">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974" alt="Protection Rapprochée">
+          <div class="svc-img-overlay"></div>
+          <span class="svc-num-big">03</span>
+        </div>
+        <div class="svc-info">
+          <div class="svc-tag"><i class="fa-solid fa-circle" style="font-size:.4rem;color:var(--blue)"></i>Agents d'Élite</div>
+          <div class="svc-icon-wrap"><i class="fa-solid fa-user-shield"></i></div>
+          <h2>Protection Rapprochée</h2>
+          <p>Nos gardes du corps sont issus des unités d'élite des forces de sécurité guinéennes. Formation internationale, discrétion absolue et réactivité maximale.</p>
+          <ul class="svc-features">
+            <li><i class="fa-solid fa-check"></i>Gardes du corps certifiés niveau international</li>
+            <li><i class="fa-solid fa-check"></i>Analyse de menaces et sécurisation des déplacements</li>
+            <li><i class="fa-solid fa-check"></i>Protection 24/7 ou à la vacation</li>
+            <li><i class="fa-solid fa-check"></i>Véhicule blindé disponible sur demande</li>
+            <li><i class="fa-solid fa-check"></i>Communication sécurisée en temps réel</li>
+          </ul>
+          <a href="contact.html?service=Protection Rapprochée" class="btn btn-primary" style="align-self:flex-start">Demander un devis <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- 04 Surveillance CCTV -->
+      <div class="svc-row reverse reveal">
+        <div class="svc-img">
+          <img src="https://images.unsplash.com/photo-1557597774-9d475d5a74c2?q=80&w=2069" alt="Surveillance CCTV">
+          <div class="svc-img-overlay"></div>
+          <span class="svc-num-big">04</span>
+        </div>
+        <div class="svc-info">
+          <div class="svc-tag"><i class="fa-solid fa-circle" style="font-size:.4rem;color:var(--blue)"></i>HD Temps Réel</div>
+          <div class="svc-icon-wrap"><i class="fa-solid fa-camera"></i></div>
+          <h2>Surveillance & CCTV</h2>
+          <p>Installation professionnelle de systèmes de vidéosurveillance haute définition avec monitoring centralisé depuis notre centre de contrôle opérationnel.</p>
+          <ul class="svc-features">
+            <li><i class="fa-solid fa-check"></i>Caméras HD 4K avec vision nocturne</li>
+            <li><i class="fa-solid fa-check"></i>Analyse comportementale par IA</li>
+            <li><i class="fa-solid fa-check"></i>Accès à distance via application mobile</li>
+            <li><i class="fa-solid fa-check"></i>Enregistrement cloud sécurisé 30 jours</li>
+            <li><i class="fa-solid fa-check"></i>Maintenance et support technique inclus</li>
+          </ul>
+          <a href="contact.html?service=Surveillance & CCTV" class="btn btn-primary" style="align-self:flex-start">Demander un devis <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- 05 Sécurité Entreprise -->
+      <div class="svc-row reveal">
+        <div class="svc-img">
+          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070" alt="Sécurité Entreprise">
+          <div class="svc-img-overlay"></div>
+          <span class="svc-num-big">05</span>
+        </div>
+        <div class="svc-info">
+          <div class="svc-tag"><i class="fa-solid fa-circle" style="font-size:.4rem;color:var(--blue)"></i>B2B Sur-Mesure</div>
+          <div class="svc-icon-wrap"><i class="fa-solid fa-building-shield"></i></div>
+          <h2>Sécurité Entreprise</h2>
+          <p>Solutions complètes pour entreprises, banques, hôtels et sites industriels. De la gestion des accès à la formation du personnel en passant par la sécurité périmétrique.</p>
+          <ul class="svc-features">
+            <li><i class="fa-solid fa-check"></i>Contrôle d'accès biométrique</li>
+            <li><i class="fa-solid fa-check"></i>Gestion des visiteurs et badges</li>
+            <li><i class="fa-solid fa-check"></i>Formation sécurité du personnel</li>
+            <li><i class="fa-solid fa-check"></i>Audit de sécurité physique</li>
+            <li><i class="fa-solid fa-check"></i>Plan de continuité des activités</li>
+          </ul>
+          <a href="contact.html?service=Sécurité Entreprise" class="btn btn-primary" style="align-self:flex-start">Demander un devis <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:1rem">
+      <span class="section-tag">Nos Formules</span>
+      <div class="divider" style="margin:1rem auto 0"></div>
+      <h2 class="section-title" style="margin-top:.5rem">Choisissez votre niveau de protection</h2>
+      <p style="color:var(--body);max-width:500px;margin:.5rem auto 0;font-size:.95rem">Chaque formule est personnalisable. Contactez-nous pour un devis adapté à votre situation.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card reveal">
+        <div class="price-tier">Formule Essentielle</div>
+        <h3>Protection de Base</h3>
+        <p>Idéale pour les particuliers et petits événements nécessitant une couverture ponctuelle.</p>
+        <ul class="price-incl">
+          <li><i class="fa-solid fa-check"></i>1 à 3 agents</li>
+          <li><i class="fa-solid fa-check"></i>Intervention ponctuelle</li>
+          <li><i class="fa-solid fa-check"></i>Rapport d'intervention</li>
+          <li><i class="fa-solid fa-check"></i>Hotline dédiée</li>
+        </ul>
+        <a href="contact.html" class="btn btn-outline" style="width:100%;justify-content:center;border:1.5px solid var(--blue);color:var(--blue)">Demander un devis</a>
+      </div>
+      <div class="price-card featured reveal d1">
+        <div class="price-badge">Populaire</div>
+        <div class="price-tier">Formule Professionnelle</div>
+        <h3>Protection Avancée</h3>
+        <p>Pour entreprises, résidences et événements de taille moyenne avec surveillance continue.</p>
+        <ul class="price-incl">
+          <li><i class="fa-solid fa-check"></i>3 à 10 agents</li>
+          <li><i class="fa-solid fa-check"></i>Contrat mensuel ou annuel</li>
+          <li><i class="fa-solid fa-check"></i>Système CCTV inclus</li>
+          <li><i class="fa-solid fa-check"></i>Suivi 24/7 depuis notre SOC</li>
+          <li><i class="fa-solid fa-check"></i>Rapports hebdomadaires</li>
+          <li><i class="fa-solid fa-check"></i>Formation du personnel</li>
+        </ul>
+        <a href="contact.html" class="btn btn-primary" style="width:100%;justify-content:center">Demander un devis</a>
+      </div>
+      <div class="price-card reveal d2">
+        <div class="price-tier">Formule Premium</div>
+        <h3>Protection Totale</h3>
+        <p>Solution sur-mesure pour VIPs, grandes entreprises et sites à haut risque.</p>
+        <ul class="price-incl">
+          <li><i class="fa-solid fa-check"></i>Agents illimités</li>
+          <li><i class="fa-solid fa-check"></i>Protection rapprochée incluse</li>
+          <li><i class="fa-solid fa-check"></i>Cybersécurité intégrée</li>
+          <li><i class="fa-solid fa-check"></i>Véhicule blindé disponible</li>
+          <li><i class="fa-solid fa-check"></i>Directeur de sécurité dédié</li>
+          <li><i class="fa-solid fa-check"></i>Audit mensuel complet</li>
+        </ul>
+        <a href="contact.html" class="btn btn-gold" style="width:100%;justify-content:center">Demander un devis</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band">
+  <div class="container">
+    <h2>Vous ne savez pas quelle formule choisir ?</h2>
+    <p>Nos experts réalisent une évaluation gratuite de vos besoins et vous orientent vers la solution la plus adaptée.</p>
+    <div class="cta-btns">
+      <a href="contact.html" class="btn btn-gold"><i class="fa-solid fa-phone"></i>Consultation gratuite</a>
+      <a href="https://wa.me/212778455789" class="btn btn-outline-w" target="_blank"><i class="fa-brands fa-whatsapp"></i>WhatsApp Direct</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="ft-grid">
+      <div class="ft-about">
+        <a href="index.html" class="nav-logo"><div class="logo-icon"><i class="fa-solid fa-shield-halved"></i></div><div><span class="logo-text">LYNX <span>SÉCURITÉ</span></span><span class="logo-sub">Cybersécurité & Protection</span></div></a>
+        <p>L'entreprise de référence en sécurité privée et technologique en République de Guinée.</p>
+        <div class="ft-socials"><a href="#"><i class="fa-brands fa-facebook-f"></i></a><a href="#"><i class="fa-brands fa-linkedin-in"></i></a><a href="#"><i class="fa-brands fa-instagram"></i></a><a href="https://wa.me/212778455789"><i class="fa-brands fa-whatsapp"></i></a></div>
+      </div>
+      <div class="ft-col"><h4>Navigation</h4><ul><li><a href="index.html">Accueil</a></li><li><a href="services.html">Services</a></li><li><a href="cybersecurite.html">Cybersécurité</a></li><li><a href="apropos.html">À Propos</a></li><li><a href="methode.html">Notre Méthode</a></li><li><a href="contact.html">Réserver</a></li></ul></div>
+      <div class="ft-col"><h4>Contact</h4><div class="ft-ci"><i class="fa-solid fa-location-dot"></i><span>Lambanyi, Conakry, Guinée</span></div><div class="ft-ci"><i class="fa-brands fa-whatsapp"></i><a href="https://wa.me/212778455789">+212 778 455 789</a></div><div class="ft-ci"><i class="fa-solid fa-envelope"></i><a href="mailto:Sidikidiomande00@gmail.com">Sidikidiomande00@gmail.com</a></div></div>
+    </div>
+    <div class="ft-btm"><p>© 2025 LYNX SÉCURITÉ — Tous droits réservés.</p><p>Agréé État Guinéen — Opérationnel 24h/24, 7j/7</p></div>
+  </div>
+</footer>
+<script>
+const nb=document.getElementById('navbar'),hbg=document.getElementById('hbg'),mob=document.getElementById('mobNav');
+hbg.addEventListener('click',()=>{mob.classList.toggle('open');hbg.querySelector('i').className=mob.classList.contains('open')?'fa-solid fa-xmark':'fa-solid fa-bars'});
+document.querySelectorAll('.reveal').forEach(el=>new IntersectionObserver(([e])=>{if(e.isIntersecting)el.classList.add('on')},{threshold:.1}).observe(el));
+</script>
+</body>
+</html>

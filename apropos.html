@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LYNX SÉCURITÉ — À Propos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root{--navy:#0B1D3A;--blue:#1D4ED8;--blue-h:#1740B8;--gold:#C9A84C;--gold-l:#E2C47A;--white:#fff;--off:#F7F8FA;--lgray:#EEF1F6;--mgray:#8899B0;--dark:#1A2B42;--body:#4A5E74;--border:#DDE3EC;--sh-md:0 8px 32px rgba(11,29,58,.12);--sh-lg:0 20px 60px rgba(11,29,58,.18)}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',sans-serif;color:var(--body);background:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    a{text-decoration:none}
+    .container{max-width:1200px;margin:0 auto;padding:0 2rem}
+    #navbar{position:fixed;top:0;width:100%;z-index:1000;background:var(--navy);box-shadow:0 2px 24px rgba(0,0,0,.25)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;height:76px}
+    .nav-logo{display:flex;align-items:center;gap:12px}
+    .logo-icon{width:42px;height:42px;background:var(--blue);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .logo-icon i{color:#fff;font-size:1.1rem}
+    .logo-text{font-size:1.1rem;font-weight:700;color:#fff;letter-spacing:.04em}
+    .logo-text span{color:var(--gold)}
+    .logo-sub{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);display:block;margin-top:1px}
+    .nav-links{display:flex;align-items:center;gap:2rem}
+    .nav-links a{font-size:.875rem;font-weight:500;color:rgba(255,255,255,.7);transition:color .2s;position:relative;padding-bottom:4px}
+    .nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--gold);transition:width .25s}
+    .nav-links a:hover,.nav-links a.active{color:#fff}
+    .nav-links a:hover::after,.nav-links a.active::after{width:100%}
+    .nav-cta{padding:.55rem 1.3rem;background:var(--gold);color:var(--navy)!important;font-weight:700!important;border-radius:4px;transition:background .25s!important}
+    .nav-cta::after{display:none!important}
+    .nav-cta:hover{background:var(--gold-l)!important}
+    .hamburger{display:none;background:none;border:none;cursor:pointer;color:#fff;font-size:1.4rem}
+    .mob-nav{display:none;flex-direction:column;background:var(--navy);position:absolute;top:100%;width:100%;border-top:1px solid rgba(255,255,255,.08)}
+    .mob-nav.open{display:flex}
+    .mob-nav a{padding:.9rem 2rem;color:rgba(255,255,255,.75);font-weight:500;border-bottom:1px solid rgba(255,255,255,.06);transition:color .2s}
+    .mob-nav a:hover{color:var(--gold)}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:.85rem 2rem;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;border:none;cursor:pointer;border-radius:4px;transition:all .25s}
+    .btn-primary{background:var(--blue);color:#fff}
+    .btn-primary:hover{background:var(--blue-h);box-shadow:0 6px 24px rgba(29,78,216,.35);transform:translateY(-1px)}
+    .btn-gold{background:var(--gold);color:var(--navy)}
+    .btn-gold:hover{background:var(--gold-l);transform:translateY(-1px)}
+    .btn-outline-w{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+    .btn-outline-w:hover{background:rgba(255,255,255,.08)}
+    .section-tag{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:1rem}
+    .section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:700;color:var(--dark);line-height:1.2;margin-bottom:1rem}
+    .section-title-w{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:700;color:#fff;line-height:1.2;margin-bottom:1rem}
+    .divider{width:48px;height:3px;background:var(--gold);margin-bottom:1.5rem;border-radius:2px}
+    .reveal{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
+    .reveal.on{opacity:1;transform:none}
+    .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+    /* PAGE HEADER */
+    .page-header{padding:7rem 0 4rem;background:var(--navy);position:relative;overflow:hidden}
+    .page-header::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=2069') center/cover;opacity:.06}
+    .page-header::after{content:'';position:absolute;left:0;top:0;width:4px;height:100%;background:linear-gradient(180deg,transparent,var(--gold) 30%,var(--gold) 70%,transparent)}
+    .ph-inner{position:relative;z-index:1}
+    .breadcrumb{display:flex;align-items:center;gap:8px;font-size:.78rem;color:rgba(255,255,255,.4);margin-bottom:1.5rem}
+    .breadcrumb a{color:rgba(255,255,255,.4);transition:color .2s}
+    .breadcrumb a:hover{color:var(--gold)}
+    .breadcrumb i{font-size:.6rem}
+    .breadcrumb span{color:var(--gold)}
+    .ph-title{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4vw,3.5rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:1rem}
+    .ph-title em{font-style:normal;color:var(--gold)}
+    .ph-desc{font-size:1rem;color:rgba(255,255,255,.55);max-width:560px;line-height:1.8}
+
+    /* STORY */
+    #story{padding:5rem 0;background:var(--white)}
+    .story-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+    .story-img-wrap{position:relative}
+    .story-img{border-radius:6px;overflow:hidden;box-shadow:var(--sh-lg)}
+    .story-img img{width:100%;filter:brightness(.85);display:block;transition:filter .5s}
+    .story-img:hover img{filter:brightness(1)}
+    .founder-badge{position:absolute;bottom:-1.5rem;left:-1.5rem;background:var(--gold);padding:1.5rem 1.8rem;border-radius:4px;box-shadow:var(--sh-md)}
+    .fb-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--navy)}
+    .fb-role{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(11,29,58,.6);margin-top:3px}
+    .story-text p{font-size:.95rem;line-height:1.9;color:var(--body);margin-bottom:1.2rem}
+    .story-text blockquote{border-left:3px solid var(--gold);padding:.8rem 1.2rem;background:var(--off);border-radius:0 4px 4px 0;font-style:italic;color:var(--dark);font-size:.95rem;margin:1.5rem 0}
+    .certifs{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem}
+    .certif{display:flex;align-items:center;gap:6px;background:var(--off);border:1px solid var(--border);color:var(--dark);font-size:.78rem;font-weight:500;padding:.45rem 1rem;border-radius:2px;transition:all .25s}
+    .certif i{color:var(--gold);font-size:.65rem}
+    .certif:hover{border-color:var(--blue);color:var(--blue)}
+
+    /* STATS */
+    .stats-row{background:var(--navy);padding:4rem 0}
+    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+    .stat-b{padding:2rem;border-right:1px solid rgba(255,255,255,.08);text-align:center}
+    .stat-b:last-child{border-right:none}
+    .stat-n{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:700;color:#fff;display:block;line-height:1}
+    .stat-n .u{font-size:1.4rem;color:var(--gold)}
+    .stat-l{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:8px;display:block}
+
+    /* VALUES */
+    #values{padding:5rem 0;background:var(--off);border-top:1px solid var(--border)}
+    .val-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+    .val-card{background:#fff;border:1.5px solid var(--border);border-radius:8px;padding:2rem;transition:all .3s}
+    .val-card:hover{border-color:var(--blue);box-shadow:var(--sh-md);transform:translateY(-4px)}
+    .val-ico{width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:1.2rem}
+    .val-card h3{font-size:1rem;font-weight:700;color:var(--dark);margin-bottom:.5rem}
+    .val-card p{font-size:.85rem;line-height:1.7;color:var(--body)}
+
+    /* TEAM */
+    #team{padding:5rem 0;background:var(--white)}
+    .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3rem}
+    .team-card{text-align:center}
+    .team-img{width:120px;height:120px;border-radius:50%;overflow:hidden;margin:0 auto 1rem;border:3px solid var(--border);transition:border-color .3s}
+    .team-card:hover .team-img{border-color:var(--gold)}
+    .team-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(40%);transition:filter .3s}
+    .team-card:hover .team-img img{filter:none}
+    .team-card h3{font-size:.95rem;font-weight:700;color:var(--dark);margin-bottom:.2rem}
+    .team-card .role{font-size:.78rem;color:var(--blue);font-weight:500;letter-spacing:.05em;margin-bottom:.5rem}
+    .team-card p{font-size:.8rem;color:var(--body);line-height:1.5}
+
+    /* HISTORY TIMELINE */
+    #history{padding:5rem 0;background:var(--navy)}
+    .timeline{position:relative;padding-left:2rem}
+    .timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--gold),rgba(201,168,76,.2))}
+    .tl-item{position:relative;padding-left:2.5rem;padding-bottom:3rem}
+    .tl-item:last-child{padding-bottom:0}
+    .tl-dot{position:absolute;left:-2.4rem;top:.3rem;width:16px;height:16px;border-radius:50%;background:var(--gold);border:3px solid var(--navy);box-shadow:0 0 0 2px var(--gold)}
+    .tl-year{font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold-l);margin-bottom:.4rem;display:block}
+    .tl-item h3{font-size:1rem;font-weight:700;color:#fff;margin-bottom:.4rem}
+    .tl-item p{font-size:.85rem;color:rgba(255,255,255,.5);line-height:1.7}
+
+    /* CTA */
+    .cta-band{background:var(--blue);padding:5rem 0;text-align:center}
+    .cta-band h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);color:#fff;margin-bottom:1rem}
+    .cta-band p{color:rgba(255,255,255,.7);max-width:480px;margin:0 auto 2.5rem}
+    .cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+
+    footer{background:#070E1C;padding:4rem 0 2rem}
+    .ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:4rem;margin-bottom:3rem}
+    .ft-about p{font-size:.88rem;line-height:1.8;color:rgba(255,255,255,.3);margin:1rem 0 1.5rem;max-width:280px}
+    .ft-socials{display:flex;gap:.6rem}
+    .ft-socials a{width:34px;height:34px;border:1px solid rgba(255,255,255,.1);border-radius:4px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.3);font-size:.85rem;transition:all .2s}
+    .ft-socials a:hover{border-color:var(--gold);color:var(--gold)}
+    .ft-col h4{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1.2rem;font-weight:600}
+    .ft-col ul{list-style:none}
+    .ft-col ul li{margin-bottom:.7rem}
+    .ft-col ul li a{color:rgba(255,255,255,.4);font-size:.87rem;transition:color .2s}
+    .ft-col ul li a:hover{color:var(--gold)}
+    .ft-ci{display:flex;align-items:flex-start;gap:10px;margin-bottom:.9rem}
+    .ft-ci i{color:var(--gold);font-size:.8rem;margin-top:3px;flex-shrink:0}
+    .ft-ci a,.ft-ci span{color:rgba(255,255,255,.4);font-size:.87rem;transition:color .2s;line-height:1.5}
+    .ft-ci a:hover{color:#fff}
+    .ft-btm{border-top:1px solid rgba(255,255,255,.06);padding-top:1.5rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+    .ft-btm p{font-size:.75rem;color:rgba(255,255,255,.18)}
+
+    @media(max-width:1024px){.story-grid{grid-template-columns:1fr;gap:3rem}.val-grid{grid-template-columns:1fr 1fr}.team-grid{grid-template-columns:1fr 1fr}.stats-grid{grid-template-columns:1fr 1fr}.stat-b{border-right:none;border-bottom:1px solid rgba(255,255,255,.08)}.ft-grid{grid-template-columns:1fr 1fr;gap:2rem}.founder-badge{left:0;bottom:-1rem}}
+    @media(max-width:768px){.nav-links{display:none}.hamburger{display:block}.val-grid{grid-template-columns:1fr}.team-grid{grid-template-columns:1fr 1fr}.ft-grid{grid-template-columns:1fr}.ft-btm{flex-direction:column;text-align:center}}
+  </style>
+</head>
+<body>
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html"><div class="logo-icon"><i class="fa-solid fa-shield-halved"></i></div><div><span class="logo-text">LYNX <span>SÉCURITÉ</span></span><span class="logo-sub">Cybersécurité & Protection</span></div></a>
+      <div class="nav-links">
+        <a href="index.html">Accueil</a><a href="services.html">Services</a><a href="cybersecurite.html">Cybersécurité</a><a href="apropos.html" class="active">À Propos</a><a href="methode.html">Notre Méthode</a><a href="contact.html" class="nav-cta">Réserver</a>
+      </div>
+      <button class="hamburger" id="hbg"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </div>
+  <div class="mob-nav" id="mobNav"><a href="index.html">Accueil</a><a href="services.html">Services</a><a href="cybersecurite.html">Cybersécurité</a><a href="apropos.html">À Propos</a><a href="methode.html">Notre Méthode</a><a href="contact.html">Réserver</a></div>
+</nav>
+
+<div class="page-header">
+  <div class="container ph-inner">
+    <div class="breadcrumb"><a href="index.html">Accueil</a><i class="fa-solid fa-chevron-right"></i><span>À Propos</span></div>
+    <h1 class="ph-title">Notre <em>Histoire</em></h1>
+    <p class="ph-desc">Une entreprise fondée sur des valeurs militaires, portée par la conviction que chaque guinéen mérite une protection de niveau mondial.</p>
+  </div>
+</div>
+
+<!-- STORY -->
+<section id="story">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-img-wrap reveal">
+        <div class="story-img"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974" alt="M. Mamady Diomandé"></div>
+        <div class="founder-badge"><div class="fb-name">M. Mamady Diomandé</div><div class="fb-role">CEO & Fondateur</div></div>
+      </div>
+      <div class="story-text reveal d1">
+        <span class="section-tag">Notre Histoire</span>
+        <div class="divider"></div>
+        <h2 class="section-title">Née d'une conviction, forgée sur le terrain.</h2>
+        <p>LYNX SÉCURITÉ a été fondée en 2013 par M. Mamady Diomandé, officier supérieur ayant servi 15 ans au sein des forces de sécurité guinéennes. Fort de son expérience terrain et de formations reçues à l'étranger, il a constaté un vide criant dans l'offre de sécurité privée professionnelle en Guinée.</p>
+        <blockquote>« La sécurité n'est pas un luxe. C'est un droit fondamental que chaque citoyen et chaque entreprise doit pouvoir exercer. »<br><strong style="font-style:normal;font-size:.85rem;color:var(--mgray);margin-top:.5rem;display:block">— M. Mamady Diomandé, Fondateur</strong></blockquote>
+        <p>Depuis sa création, LYNX SÉCURITÉ est devenue la référence nationale, couvrant la protection physique, la cybersécurité et la surveillance technologique pour des clients allant des ambassades aux multinationales, en passant par les particuliers haut de gamme.</p>
+        <div class="certifs">
+          <div class="certif"><i class="fa-solid fa-check"></i>Agréé État Guinéen</div>
+          <div class="certif"><i class="fa-solid fa-check"></i>ISO 27001 Ready</div>
+          <div class="certif"><i class="fa-solid fa-check"></i>CISSP Certifié</div>
+          <div class="certif"><i class="fa-solid fa-check"></i>CEH Certifié</div>
+          <div class="certif"><i class="fa-solid fa-check"></i>OSCP Ready</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-row">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-b reveal"><span class="stat-n"><span class="counter" data-t="1500">1500</span><span class="u">+</span></span><span class="stat-l">Agents certifiés</span></div>
+      <div class="stat-b reveal d1"><span class="stat-n"><span class="counter" data-t="12">12</span><span class="u"> ans</span></span><span class="stat-l">D'expérience</span></div>
+      <div class="stat-b reveal d2"><span class="stat-n"><span class="counter" data-t="300">300</span><span class="u">+</span></span><span class="stat-l">Clients protégés</span></div>
+      <div class="stat-b reveal d3"><span class="stat-n"><span class="counter" data-t="6">6</span></span><span class="stat-l">Villes couvertes</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- VALUES -->
+<section id="values">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:1rem">
+      <span class="section-tag">Nos Valeurs</span>
+      <div class="divider" style="margin:1rem auto 0"></div>
+      <h2 class="section-title" style="margin-top:.5rem">Ce qui nous guide chaque jour</h2>
+    </div>
+    <div class="val-grid">
+      <div class="val-card reveal"><div class="val-ico" style="background:rgba(29,78,216,.08)"><i class="fa-solid fa-shield-halved" style="color:var(--blue)"></i></div><h3>Intégrité</h3><p>Nos engagements sont sacrés. Nous ne promettons que ce que nous pouvons tenir, et nous tenons toujours ce que nous promettons.</p></div>
+      <div class="val-card reveal d1"><div class="val-ico" style="background:rgba(201,168,76,.1)"><i class="fa-solid fa-star" style="color:var(--gold)"></i></div><h3>Excellence</h3><p>Chaque mission est traitée avec le même niveau d'exigence, qu'il s'agisse d'une petite résidence ou d'une grande entreprise.</p></div>
+      <div class="val-card reveal d2"><div class="val-ico" style="background:rgba(21,128,61,.08)"><i class="fa-solid fa-handshake" style="color:#15803d"></i></div><h3>Confiance</h3><p>La discrétion absolue est notre règle d'or. Vos informations et vos habitudes ne quittent jamais notre cercle de confiance.</p></div>
+      <div class="val-card reveal"><div class="val-ico" style="background:rgba(29,78,216,.08)"><i class="fa-solid fa-bolt" style="color:var(--blue)"></i></div><h3>Réactivité</h3><p>Chaque seconde compte en situation de crise. Nos protocoles garantissent une réponse opérationnelle sous 2 heures maximum.</p></div>
+      <div class="val-card reveal d1"><div class="val-ico" style="background:rgba(201,168,76,.1)"><i class="fa-solid fa-lightbulb" style="color:var(--gold)"></i></div><h3>Innovation</h3><p>Nous investissons continuellement dans les nouvelles technologies pour anticiper les menaces de demain et rester en avance.</p></div>
+      <div class="val-card reveal d2"><div class="val-ico" style="background:rgba(11,29,58,.08)"><i class="fa-solid fa-globe" style="color:var(--navy)"></i></div><h3>Impact Local</h3><p>Nous formons et employons exclusivement des talents guinéens, contribuant au développement économique et sécuritaire du pays.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:1rem">
+      <span class="section-tag">Notre Équipe</span>
+      <div class="divider" style="margin:1rem auto 0"></div>
+      <h2 class="section-title" style="margin-top:.5rem">Les experts qui vous protègent</h2>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="team-img"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400" alt="Mamady Diomandé"></div>
+        <h3>Mamady Diomandé</h3>
+        <div class="role">CEO & Fondateur</div>
+        <p>15 ans dans les forces de sécurité guinéennes. Expert en gestion de crise et protection rapprochée.</p>
+      </div>
+      <div class="team-card reveal d1">
+        <div class="team-img"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=400" alt="Directeur Cyber"></div>
+        <h3>Ibrahim Kouyaté</h3>
+        <div class="role">Directeur Cybersécurité</div>
+        <p>CISSP & CEH certifié. Ancien consultant pour des ONG internationales. Expert en pentest et SOC.</p>
+      </div>
+      <div class="team-card reveal d2">
+        <div class="team-img"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400" alt="Directrice Opérations"></div>
+        <h3>Fatoumata Bah</h3>
+        <div class="role">Directrice des Opérations</div>
+        <p>Gestionnaire de projet certifiée PMP. Coordonne le déploiement de plus de 500 agents sur le terrain.</p>
+      </div>
+      <div class="team-card reveal d3">
+        <div class="team-img"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=400" alt="Chef Sécurité"></div>
+        <h3>Sékou Camara</h3>
+        <div class="role">Chef des Opérations Terrain</div>
+        <p>Ancien forces spéciales. Formé en France et aux États-Unis. Responsable de la formation des agents.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HISTORY TIMELINE -->
+<section id="history">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start">
+      <div class="reveal">
+        <span class="section-tag" style="color:var(--gold-l)">Notre Parcours</span>
+        <div class="divider"></div>
+        <h2 class="section-title-w">12 ans de croissance et d'innovation.</h2>
+        <p style="color:rgba(255,255,255,.55);font-size:.95rem;line-height:1.85;margin-top:1rem">De 3 agents à plus de 1 500, LYNX SÉCURITÉ a grandi pour devenir la plus grande entreprise de sécurité privée de Guinée, sans jamais perdre ses valeurs fondatrices.</p>
+      </div>
+      <div class="timeline reveal d1">
+        <div class="tl-item"><div class="tl-dot"></div><span class="tl-year">2013</span><h3>Fondation de LYNX SÉCURITÉ</h3><p>Démarrage avec 3 agents et un premier contrat de gardiennage résidentiel à Lambanyi, Conakry.</p></div>
+        <div class="tl-item"><div class="tl-dot"></div><span class="tl-year">2015</span><h3>Premier contrat ambassade</h3><p>Signature d'un contrat de protection avec une ambassade étrangère — première reconnaissance institutionnelle.</p></div>
+        <div class="tl-item"><div class="tl-dot"></div><span class="tl-year">2017</span><h3>Lancement de la division cyber</h3><p>Création de l'unité cybersécurité avec recrutement d'experts certifiés CISSP et CEH.</p></div>
+        <div class="tl-item"><div class="tl-dot"></div><span class="tl-year">2020</span><h3>Ouverture du centre SOC 24/7</h3><p>Inauguration de notre centre opérationnel de sécurité, surveillance continue pour 80+ clients.</p></div>
+        <div class="tl-item"><div class="tl-dot"></div><span class="tl-year">2023</span><h3>Expansion nationale</h3><p>Extension des opérations à 6 villes guinéennes. Franchissement du cap des 300 clients protégés.</p></div>
+        <div class="tl-item"><div class="tl-dot"></div><span class="tl-year">2025</span><h3>1 500 agents & certification ISO</h3><p>Atteinte du cap de 1 500 agents certifiés et démarche ISO 27001 en cours de finalisation.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band">
+  <div class="container">
+    <h2>Rejoignez les 300+ clients qui nous font confiance.</h2>
+    <p>Discutons de vos besoins en sécurité et construisons ensemble votre dispositif de protection.</p>
+    <div class="cta-btns">
+      <a href="contact.html" class="btn btn-gold"><i class="fa-solid fa-phone"></i>Nous contacter</a>
+      <a href="services.html" class="btn btn-outline-w">Voir nos services</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="ft-grid">
+      <div class="ft-about"><a href="index.html" class="nav-logo"><div class="logo-icon"><i class="fa-solid fa-shield-halved"></i></div><div><span class="logo-text">LYNX <span>SÉCURITÉ</span></span><span class="logo-sub">Cybersécurité & Protection</span></div></a><p>L'entreprise de référence en sécurité privée et technologique en République de Guinée.</p><div class="ft-socials"><a href="#"><i class="fa-brands fa-facebook-f"></i></a><a href="#"><i class="fa-brands fa-linkedin-in"></i></a><a href="#"><i class="fa-brands fa-instagram"></i></a><a href="https://wa.me/212778455789"><i class="fa-brands fa-whatsapp"></i></a></div></div>
+      <div class="ft-col"><h4>Navigation</h4><ul><li><a href="index.html">Accueil</a></li><li><a href="services.html">Services</a></li><li><a href="cybersecurite.html">Cybersécurité</a></li><li><a href="apropos.html">À Propos</a></li><li><a href="methode.html">Notre Méthode</a></li><li><a href="contact.html">Réserver</a></li></ul></div>
+      <div class="ft-col"><h4>Contact</h4><div class="ft-ci"><i class="fa-solid fa-location-dot"></i><span>Lambanyi, Conakry, Guinée</span></div><div class="ft-ci"><i class="fa-brands fa-whatsapp"></i><a href="https://wa.me/212778455789">+212 778 455 789</a></div><div class="ft-ci"><i class="fa-solid fa-envelope"></i><a href="mailto:Sidikidiomande00@gmail.com">Sidikidiomande00@gmail.com</a></div></div>
+    </div>
+    <div class="ft-btm"><p>© 2025 LYNX SÉCURITÉ — Tous droits réservés.</p><p>Agréé État Guinéen — Opérationnel 24h/24, 7j/7</p></div>
+  </div>
+</footer>
+<script>
+const hbg=document.getElementById('hbg'),mob=document.getElementById('mobNav');
+hbg.addEventListener('click',()=>{mob.classList.toggle('open');hbg.querySelector('i').className=mob.classList.contains('open')?'fa-solid fa-xmark':'fa-solid fa-bars'});
+document.querySelectorAll('.reveal').forEach(el=>new IntersectionObserver(([e])=>{if(e.isIntersecting)el.classList.add('on')},{threshold:.1}).observe(el));
+let cnt=false;
+new IntersectionObserver(([e])=>{if(e.isIntersecting&&!cnt){cnt=true;document.querySelectorAll('.counter').forEach(el=>{const t=+el.dataset.t;let c=0,inc=t/80;const id=setInterval(()=>{c=Math.min(c+inc,t);el.textContent=Math.floor(c).toLocaleString();if(c>=t)clearInterval(id)},20)})}},{threshold:.3}).observe(document.querySelector('.stats-row'));
+</script>
+</body>
+</html>

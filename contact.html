@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LYNX SÉCURITÉ — Réservation & Contact</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root{--navy:#0B1D3A;--blue:#1D4ED8;--blue-h:#1740B8;--gold:#C9A84C;--gold-l:#E2C47A;--white:#fff;--off:#F7F8FA;--lgray:#EEF1F6;--mgray:#8899B0;--dark:#1A2B42;--body:#4A5E74;--border:#DDE3EC;--sh-sm:0 2px 8px rgba(11,29,58,.08);--sh-md:0 8px 32px rgba(11,29,58,.12);--sh-lg:0 20px 60px rgba(11,29,58,.18)}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',sans-serif;color:var(--body);background:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    a{text-decoration:none}
+    .container{max-width:1200px;margin:0 auto;padding:0 2rem}
+
+    /* NAV */
+    #navbar{position:fixed;top:0;width:100%;z-index:1000;background:var(--navy);box-shadow:0 2px 24px rgba(0,0,0,.25)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;height:76px}
+    .nav-logo{display:flex;align-items:center;gap:12px}
+    .logo-icon{width:42px;height:42px;background:var(--blue);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .logo-icon i{color:#fff;font-size:1.1rem}
+    .logo-text{font-size:1.1rem;font-weight:700;color:#fff;letter-spacing:.04em}
+    .logo-text span{color:var(--gold)}
+    .logo-sub{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);display:block;margin-top:1px}
+    .nav-links{display:flex;align-items:center;gap:2rem}
+    .nav-links a{font-size:.875rem;font-weight:500;color:rgba(255,255,255,.7);transition:color .2s;position:relative;padding-bottom:4px}
+    .nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--gold);transition:width .25s}
+    .nav-links a:hover,.nav-links a.active{color:#fff}
+    .nav-links a:hover::after,.nav-links a.active::after{width:100%}
+    .nav-cta{padding:.55rem 1.3rem;background:var(--gold);color:var(--navy)!important;font-weight:700!important;border-radius:4px;transition:background .25s!important}
+    .nav-cta::after{display:none!important}
+    .nav-cta:hover{background:var(--gold-l)!important}
+    .hamburger{display:none;background:none;border:none;cursor:pointer;color:#fff;font-size:1.4rem}
+    .mob-nav{display:none;flex-direction:column;background:var(--navy);position:absolute;top:100%;width:100%;border-top:1px solid rgba(255,255,255,.08)}
+    .mob-nav.open{display:flex}
+    .mob-nav a{padding:.9rem 2rem;color:rgba(255,255,255,.75);font-weight:500;border-bottom:1px solid rgba(255,255,255,.06);transition:color .2s}
+    .mob-nav a:hover{color:var(--gold)}
+
+    /* BUTTONS */
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:.85rem 2rem;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;border:none;cursor:pointer;border-radius:4px;transition:all .25s}
+    .btn-primary{background:var(--blue);color:#fff}
+    .btn-primary:hover{background:var(--blue-h);box-shadow:0 6px 24px rgba(29,78,216,.35);transform:translateY(-1px)}
+    .btn-gold{background:var(--gold);color:var(--navy)}
+    .btn-gold:hover{background:var(--gold-l);transform:translateY(-1px)}
+    .btn-wa{background:#25D366;color:#fff}
+    .btn-wa:hover{background:#1ebe5d;box-shadow:0 6px 24px rgba(37,211,102,.35);transform:translateY(-1px)}
+
+    /* COMMONS */
+    .section-tag{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:1rem}
+    .section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:700;color:var(--dark);line-height:1.2;margin-bottom:1rem}
+    .divider{width:48px;height:3px;background:var(--gold);margin-bottom:1.5rem;border-radius:2px}
+    .reveal{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
+    .reveal.on{opacity:1;transform:none}
+    .d1{transition-delay:.1s}.d2{transition-delay:.2s}
+
+    /* PAGE HEADER */
+    .page-header{padding:7rem 0 4rem;background:var(--navy);position:relative;overflow:hidden}
+    .page-header::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1423592707957-763b8b5b3591?q=80&w=2070') center/cover;opacity:.06}
+    .page-header::after{content:'';position:absolute;left:0;top:0;width:4px;height:100%;background:linear-gradient(180deg,transparent,var(--gold) 30%,var(--gold) 70%,transparent)}
+    .ph-inner{position:relative;z-index:1}
+    .breadcrumb{display:flex;align-items:center;gap:8px;font-size:.78rem;color:rgba(255,255,255,.4);margin-bottom:1.5rem}
+    .breadcrumb a{color:rgba(255,255,255,.4);transition:color .2s}
+    .breadcrumb a:hover{color:var(--gold)}
+    .breadcrumb i{font-size:.6rem}
+    .breadcrumb span{color:var(--gold)}
+    .ph-title{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4vw,3.5rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:1rem}
+    .ph-title em{font-style:normal;color:var(--gold)}
+    .ph-desc{font-size:1rem;color:rgba(255,255,255,.55);max-width:560px;line-height:1.8}
+    /* urgency strip */
+    .urgency-strip{display:inline-flex;align-items:center;gap:10px;background:rgba(37,211,102,.12);border:1px solid rgba(37,211,102,.3);border-radius:4px;padding:.5rem 1rem;margin-top:1.5rem;font-size:.8rem;color:#86efac}
+    .urg-dot{width:8px;height:8px;border-radius:50%;background:#25D366;animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+
+    /* MAIN LAYOUT */
+    #contact-section{padding:5rem 0;background:var(--off)}
+    .contact-layout{display:grid;grid-template-columns:1fr 1.8fr;gap:4rem;align-items:start}
+
+    /* LEFT SIDEBAR */
+    .contact-sidebar{}
+    .contact-sidebar h2{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:700;color:var(--dark);margin-bottom:.8rem;line-height:1.2}
+    .contact-sidebar>p{font-size:.93rem;line-height:1.8;color:var(--body);margin-bottom:2rem}
+    .contact-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:1.5rem;margin-bottom:1rem;box-shadow:var(--sh-sm);transition:border-color .25s,box-shadow .25s}
+    .contact-card:hover{border-color:var(--blue);box-shadow:var(--sh-md)}
+    .cc-top{display:flex;align-items:center;gap:12px;margin-bottom:.5rem}
+    .cc-icon{width:36px;height:36px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
+    .cc-label{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mgray)}
+    .cc-value{font-size:.92rem;font-weight:500;color:var(--dark)}
+    .cc-value a{color:var(--dark);transition:color .2s}
+    .cc-value a:hover{color:var(--blue)}
+
+    /* SERVICE QUICK LINKS */
+    .quick-links{margin-top:1.5rem}
+    .ql-label{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mgray);margin-bottom:.8rem;display:block}
+    .ql-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+    .ql-item{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:.6rem .8rem;font-size:.78rem;font-weight:500;color:var(--dark);cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:6px}
+    .ql-item:hover,.ql-item.selected{border-color:var(--blue);background:rgba(29,78,216,.04);color:var(--blue)}
+    .ql-item i{font-size:.7rem}
+
+    /* FORM CARD */
+    .form-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:2.5rem;box-shadow:var(--sh-md)}
+    .form-card-header{display:flex;align-items:center;gap:12px;padding-bottom:1.5rem;margin-bottom:1.5rem;border-bottom:1px solid var(--border)}
+    .fch-icon{width:44px;height:44px;background:rgba(29,78,216,.08);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--blue)}
+    .fch-text h3{font-size:1.05rem;font-weight:700;color:var(--dark)}
+    .fch-text p{font-size:.8rem;color:var(--mgray)}
+
+    /* FORM ELEMENTS */
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+    .form-group{margin-bottom:1.2rem}
+    .form-group label{display:flex;align-items:center;gap:6px;font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dark);margin-bottom:.5rem}
+    .form-group label .req{color:#DC2626;font-size:.7rem}
+    .form-group input,
+    .form-group select,
+    .form-group textarea{width:100%;background:var(--off);border:1.5px solid var(--border);color:var(--dark);padding:.78rem 1rem;font-family:'DM Sans',sans-serif;font-size:.9rem;border-radius:6px;outline:none;transition:border-color .2s,box-shadow .2s,background .2s}
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(29,78,216,.1);background:var(--white)}
+    .form-group input.error,
+    .form-group select.error{border-color:#DC2626;box-shadow:0 0 0 3px rgba(220,38,38,.1)}
+    .form-group textarea{resize:vertical;min-height:100px}
+    .form-group select option{background:#fff}
+
+    /* AVAILABILITY */
+    .avail-msg{font-size:.8rem;font-weight:500;padding:.45rem .8rem;border-radius:4px;margin-top:.5rem;display:none;align-items:center;gap:6px}
+    .avail-msg.ok{display:flex;background:#f0fdf4;border:1px solid #86efac;color:#15803d}
+    .avail-msg.ko{display:flex;background:#fef2f2;border:1px solid #fca5a5;color:#b91c1c}
+    .avail-msg.checking{display:flex;background:#eff6ff;border:1px solid #bfdbfe;color:var(--blue)}
+
+    /* URGENCY TOGGLE */
+    .urgency-toggle{display:flex;align-items:center;gap:10px;background:var(--off);border:1px solid var(--border);border-radius:6px;padding:.8rem 1rem;margin-bottom:1.2rem;cursor:pointer;transition:border-color .2s}
+    .urgency-toggle:hover{border-color:var(--blue)}
+    .toggle-box{width:20px;height:20px;border:2px solid var(--border);border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s}
+    .urgency-toggle.checked .toggle-box{background:var(--blue);border-color:var(--blue)}
+    .urgency-toggle.checked .toggle-box::after{content:'✓';font-size:.7rem;color:#fff}
+    .urg-text strong{display:block;font-size:.85rem;font-weight:600;color:var(--dark)}
+    .urg-text span{font-size:.75rem;color:var(--mgray)}
+
+    /* SUBMIT */
+    .form-submit{width:100%;padding:1rem;justify-content:center;font-size:1rem;border-radius:6px;margin-top:.5rem}
+    .form-note{text-align:center;font-size:.75rem;color:var(--mgray);margin-top:.8rem;display:flex;align-items:center;justify-content:center;gap:5px}
+    .form-note i{color:#15803d}
+
+    /* SUCCESS */
+    .success-panel{display:none;text-align:center;padding:3rem 1rem}
+    .success-panel.show{display:block}
+    .success-circle{width:80px;height:80px;background:#f0fdf4;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem}
+    .success-circle i{font-size:2rem;color:#15803d}
+    .success-panel h3{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--dark);margin-bottom:.5rem}
+    .success-panel p{color:var(--body);font-size:.93rem;margin-bottom:.5rem;line-height:1.7}
+    .ref-box{background:var(--lgray);border-radius:6px;padding:.8rem 1.2rem;display:inline-block;margin:1rem 0;font-family:monospace;font-size:1rem;font-weight:700;color:var(--dark);letter-spacing:.1em}
+    .success-panel .back-link{color:var(--blue);font-size:.85rem;cursor:pointer;margin-top:1rem;display:inline-block}
+    .success-panel .back-link:hover{text-decoration:underline}
+
+    /* CHANNELS SECTION */
+    #channels{padding:5rem 0;background:var(--white);border-top:1px solid var(--border)}
+    .ch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+    .ch-card{border:1.5px solid var(--border);border-radius:8px;padding:2rem;text-align:center;transition:all .3s;cursor:pointer}
+    .ch-card:hover{transform:translateY(-4px);box-shadow:var(--sh-md)}
+    .ch-card.wa:hover{border-color:#25D366}
+    .ch-card.phone:hover{border-color:var(--blue)}
+    .ch-card.mail:hover{border-color:var(--gold)}
+    .ch-ico{font-size:2rem;margin-bottom:1rem}
+    .ch-card.wa .ch-ico{color:#25D366}
+    .ch-card.phone .ch-ico{color:var(--blue)}
+    .ch-card.mail .ch-ico{color:var(--gold)}
+    .ch-card h3{font-size:1rem;font-weight:700;color:var(--dark);margin-bottom:.4rem}
+    .ch-card p{font-size:.85rem;color:var(--body);margin-bottom:1.2rem;line-height:1.6}
+    .ch-link{font-size:.85rem;font-weight:600;color:inherit;transition:opacity .2s}
+    .ch-link:hover{opacity:.7}
+    .ch-card.wa .ch-link{color:#25D366}
+    .ch-card.phone .ch-link{color:var(--blue)}
+    .ch-card.mail .ch-link{color:var(--gold)}
+
+    /* MAP SECTION */
+    #map-section{padding:5rem 0;background:var(--off);border-top:1px solid var(--border)}
+    .map-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+    .map-frame{border-radius:8px;overflow:hidden;box-shadow:var(--sh-lg);height:360px;background:var(--lgray);display:flex;align-items:center;justify-content:center;border:1px solid var(--border)}
+    .map-placeholder{text-align:center;padding:2rem}
+    .map-placeholder i{font-size:3rem;color:var(--mgray);margin-bottom:1rem}
+    .map-placeholder p{font-size:.9rem;color:var(--mgray)}
+    .map-info h2{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--dark);margin-bottom:1.2rem}
+    .map-detail{display:flex;align-items:flex-start;gap:12px;margin-bottom:1.2rem;padding-bottom:1.2rem;border-bottom:1px solid var(--border)}
+    .map-detail:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+    .md-icon{width:38px;height:38px;background:rgba(29,78,216,.08);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--blue);font-size:.9rem}
+    .md-text strong{display:block;font-size:.85rem;font-weight:700;color:var(--dark);margin-bottom:2px}
+    .md-text span,.md-text a{font-size:.88rem;color:var(--body);line-height:1.6}
+    .md-text a{transition:color .2s}
+    .md-text a:hover{color:var(--blue)}
+    .hours-grid{display:grid;grid-template-columns:1fr 1fr;gap:.4rem;margin-top:.5rem}
+    .hours-row{display:flex;justify-content:space-between;font-size:.8rem}
+    .hours-row span:first-child{color:var(--body)}
+    .hours-row span:last-child{font-weight:600;color:var(--dark)}
+
+    /* CTA BAND */
+    .cta-band{background:var(--navy);padding:4rem 0;text-align:center}
+    .cta-band h2{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,2.5vw,2.2rem);color:#fff;margin-bottom:.8rem}
+    .cta-band p{color:rgba(255,255,255,.5);margin:0 auto 2rem;max-width:440px}
+    .cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+
+    /* FOOTER */
+    footer{background:#070E1C;padding:4rem 0 2rem}
+    .ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:4rem;margin-bottom:3rem}
+    .ft-about p{font-size:.88rem;line-height:1.8;color:rgba(255,255,255,.3);margin:1rem 0 1.5rem;max-width:280px}
+    .ft-socials{display:flex;gap:.6rem}
+    .ft-socials a{width:34px;height:34px;border:1px solid rgba(255,255,255,.1);border-radius:4px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.3);font-size:.85rem;transition:all .2s}
+    .ft-socials a:hover{border-color:var(--gold);color:var(--gold)}
+    .ft-col h4{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1.2rem;font-weight:600}
+    .ft-col ul{list-style:none}
+    .ft-col ul li{margin-bottom:.7rem}
+    .ft-col ul li a{color:rgba(255,255,255,.4);font-size:.87rem;transition:color .2s}
+    .ft-col ul li a:hover{color:var(--gold)}
+    .ft-ci{display:flex;align-items:flex-start;gap:10px;margin-bottom:.9rem}
+    .ft-ci i{color:var(--gold);font-size:.8rem;margin-top:3px;flex-shrink:0}
+    .ft-ci a,.ft-ci span{color:rgba(255,255,255,.4);font-size:.87rem;transition:color .2s;line-height:1.5}
+    .ft-ci a:hover{color:#fff}
+    .ft-btm{border-top:1px solid rgba(255,255,255,.06);padding-top:1.5rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+    .ft-btm p{font-size:.75rem;color:rgba(255,255,255,.18)}
+
+    @media(max-width:1024px){.contact-layout{grid-template-columns:1fr;gap:2.5rem}.map-layout{grid-template-columns:1fr;gap:2.5rem}.ch-grid{grid-template-columns:1fr 1fr}.ft-grid{grid-template-columns:1fr 1fr;gap:2rem}}
+    @media(max-width:768px){.nav-links{display:none}.hamburger{display:block}.form-row{grid-template-columns:1fr}.ql-grid{grid-template-columns:1fr}.ch-grid{grid-template-columns:1fr}.ft-grid{grid-template-columns:1fr}.ft-btm{flex-direction:column;text-align:center}.map-frame{height:240px}}
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">
+        <div class="logo-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <div><span class="logo-text">LYNX <span>SÉCURITÉ</span></span><span class="logo-sub">Cybersécurité & Protection</span></div>
+      </a>
+      <div class="nav-links">
+        <a href="index.html">Accueil</a>
+        <a href="services.html">Services</a>
+        <a href="cybersecurite.html">Cybersécurité</a>
+        <a href="apropos.html">À Propos</a>
+        <a href="methode.html">Notre Méthode</a>
+        <a href="contact.html" class="nav-cta active">Réserver</a>
+      </div>
+      <button class="hamburger" id="hbg"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </div>
+  <div class="mob-nav" id="mobNav">
+    <a href="index.html">Accueil</a><a href="services.html">Services</a>
+    <a href="cybersecurite.html">Cybersécurité</a><a href="apropos.html">À Propos</a>
+    <a href="methode.html">Notre Méthode</a><a href="contact.html">Réserver</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="container ph-inner">
+    <div class="breadcrumb"><a href="index.html">Accueil</a><i class="fa-solid fa-chevron-right"></i><span>Réservation</span></div>
+    <h1 class="ph-title">Réserver un <em>Agent</em></h1>
+    <p class="ph-desc">Remplissez le formulaire — un expert LYNX vous rappelle sous 2 heures pour confirmer votre mission. Les créneaux déjà pris sont automatiquement bloqués.</p>
+    <div class="urgency-strip">
+      <span class="urg-dot"></span>
+      Urgence ? Appelez directement le <strong style="margin-left:4px">+212 778 455 789</strong> — disponible 24h/24
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT SECTION -->
+<section id="contact-section">
+  <div class="container">
+    <div class="contact-layout">
+
+      <!-- SIDEBAR -->
+      <div class="contact-sidebar reveal">
+        <span class="section-tag">Nous contacter</span>
+        <div class="divider"></div>
+        <h2>Parlons de votre sécurité.</h2>
+        <p>Notre équipe est disponible 24h/24. Chaque demande est traitée avec la plus stricte confidentialité.</p>
+
+        <div class="contact-card">
+          <div class="cc-top">
+            <div class="cc-icon" style="background:rgba(37,211,102,.1)"><i class="fa-brands fa-whatsapp" style="color:#25D366"></i></div>
+            <div class="cc-label">WhatsApp</div>
+          </div>
+          <div class="cc-value"><a href="https://wa.me/212778455789" target="_blank">+212 778 455 789</a></div>
+        </div>
+        <div class="contact-card">
+          <div class="cc-top">
+            <div class="cc-icon" style="background:rgba(29,78,216,.08)"><i class="fa-solid fa-envelope" style="color:var(--blue)"></i></div>
+            <div class="cc-label">Email</div>
+          </div>
+          <div class="cc-value"><a href="mailto:Sidikidiomande00@gmail.com">Sidikidiomande00@gmail.com</a></div>
+        </div>
+        <div class="contact-card">
+          <div class="cc-top">
+            <div class="cc-icon" style="background:rgba(201,168,76,.1)"><i class="fa-solid fa-location-dot" style="color:var(--gold)"></i></div>
+            <div class="cc-label">Adresse</div>
+          </div>
+          <div class="cc-value">Lambanyi, Conakry, Guinée</div>
+        </div>
+        <div class="contact-card">
+          <div class="cc-top">
+            <div class="cc-icon" style="background:rgba(29,78,216,.08)"><i class="fa-solid fa-clock" style="color:var(--blue)"></i></div>
+            <div class="cc-label">Disponibilité</div>
+          </div>
+          <div class="cc-value">24h/24 — 7j/7 — 365 jours/an</div>
+        </div>
+
+        <!-- Service quick select -->
+        <div class="quick-links">
+          <span class="ql-label">Sélection rapide du service</span>
+          <div class="ql-grid">
+            <div class="ql-item" onclick="quickSelect(this,'Sécurité Événementielle')"><i class="fa-solid fa-ticket"></i>Événementielle</div>
+            <div class="ql-item" onclick="quickSelect(this,'Sécurité Résidentielle')"><i class="fa-solid fa-house-lock"></i>Résidentielle</div>
+            <div class="ql-item" onclick="quickSelect(this,'Protection Rapprochée')"><i class="fa-solid fa-user-shield"></i>Rapprochée</div>
+            <div class="ql-item" onclick="quickSelect(this,'Cybersécurité')"><i class="fa-solid fa-shield-virus"></i>Cybersécurité</div>
+            <div class="ql-item" onclick="quickSelect(this,'Surveillance & CCTV')"><i class="fa-solid fa-camera"></i>CCTV</div>
+            <div class="ql-item" onclick="quickSelect(this,'Sécurité Entreprise')"><i class="fa-solid fa-building-shield"></i>Entreprise</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORM -->
+      <div class="form-card reveal d1">
+
+        <div class="form-card-header">
+          <div class="fch-icon"><i class="fa-solid fa-calendar-check"></i></div>
+          <div class="fch-text">
+            <h3>Nouvelle demande de mission</h3>
+            <p>Réponse garantie sous 2 heures — données chiffrées et confidentielles</p>
+          </div>
+        </div>
+
+        <!-- Formulaire -->
+        <form id="bookingForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Type de mission <span class="req">*</span></label>
+              <select id="serviceSelect" required>
+                <option value="">— Sélectionner —</option>
+                <option>Sécurité Événementielle</option>
+                <option>Sécurité Résidentielle</option>
+                <option>Protection Rapprochée</option>
+                <option>Cybersécurité</option>
+                <option>Surveillance & CCTV</option>
+                <option>Sécurité Entreprise</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Date de début <span class="req">*</span></label>
+              <input type="date" id="dateInput" required>
+              <div class="avail-msg" id="availMsg"></div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Nom complet <span class="req">*</span></label>
+              <input type="text" id="nameInput" placeholder="M. / Mme …" required>
+            </div>
+            <div class="form-group">
+              <label>Téléphone / WhatsApp <span class="req">*</span></label>
+              <input type="tel" id="phoneInput" placeholder="+224 …" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" id="emailInput" placeholder="votre@email.com">
+            </div>
+            <div class="form-group">
+              <label>Localisation</label>
+              <input type="text" id="locationInput" placeholder="Quartier, ville …">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Nombre d'agents</label>
+              <input type="number" id="agentsInput" placeholder="Ex : 3" min="1">
+            </div>
+            <div class="form-group">
+              <label>Date de fin (optionnel)</label>
+              <input type="date" id="dateEndInput">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Description de la mission</label>
+            <textarea id="descInput" placeholder="Décrivez votre situation, contraintes ou exigences particulières…"></textarea>
+          </div>
+
+          <!-- Urgency toggle -->
+          <div class="urgency-toggle" id="urgencyToggle" onclick="toggleUrgency()">
+            <div class="toggle-box" id="toggleBox"></div>
+            <div class="urg-text">
+              <strong>Mission urgente</strong>
+              <span>Intervention sous 2h — majoré de 20% sur le tarif standard</span>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary form-submit" id="submitBtn">
+            <i class="fa-solid fa-paper-plane"></i> Envoyer la demande
+          </button>
+          <p class="form-note"><i class="fa-solid fa-lock"></i> Transmission sécurisée — données strictement confidentielles</p>
+        </form>
+
+        <!-- SUCCESS -->
+        <div class="success-panel" id="successPanel">
+          <div class="success-circle"><i class="fa-solid fa-circle-check"></i></div>
+          <h3>Mission enregistrée !</h3>
+          <p>Votre demande a été transmise à notre centre opérationnel.<br>Un agent vous contacte sous <strong>2 heures</strong>.</p>
+          <div class="ref-box" id="refDisplay">—</div>
+          <p style="font-size:.8rem;color:var(--mgray)">Conservez cette référence pour le suivi de votre dossier.</p>
+          <a class="btn btn-wa" href="https://wa.me/212778455789" target="_blank" style="display:inline-flex;margin-top:1rem"><i class="fa-brands fa-whatsapp"></i>Confirmer sur WhatsApp</a>
+          <br>
+          <span class="back-link" onclick="resetForm()">← Soumettre une nouvelle demande</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHANNELS -->
+<section id="channels">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:1rem">
+      <span class="section-tag">Autres Canaux</span>
+      <div class="divider" style="margin:1rem auto 0"></div>
+      <h2 class="section-title" style="margin-top:.5rem">Contactez-nous où vous voulez</h2>
+    </div>
+    <div class="ch-grid">
+      <div class="ch-card wa reveal" onclick="window.open('https://wa.me/212778455789','_blank')">
+        <div class="ch-ico"><i class="fa-brands fa-whatsapp"></i></div>
+        <h3>WhatsApp</h3>
+        <p>Envoyez-nous un message à toute heure. Réponse en moins de 15 minutes en journée.</p>
+        <a href="https://wa.me/212778455789" class="ch-link" target="_blank">+212 778 455 789</a>
+      </div>
+      <div class="ch-card phone reveal d1">
+        <div class="ch-ico"><i class="fa-solid fa-phone"></i></div>
+        <h3>Appel Direct</h3>
+        <p>Pour les urgences, appelez directement notre centre opérationnel disponible 24h/24.</p>
+        <a href="tel:+212778455789" class="ch-link">+212 778 455 789</a>
+      </div>
+      <div class="ch-card mail reveal d2" onclick="location.href='mailto:Sidikidiomande00@gmail.com'">
+        <div class="ch-ico"><i class="fa-solid fa-envelope"></i></div>
+        <h3>Email</h3>
+        <p>Pour les demandes détaillées, devis ou partenariats. Réponse sous 24 heures ouvrées.</p>
+        <a href="mailto:Sidikidiomande00@gmail.com" class="ch-link">Sidikidiomande00@gmail.com</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP / ADRESSE -->
+<section id="map-section">
+  <div class="container">
+    <div class="map-layout">
+      <div class="map-frame reveal">
+        <div class="map-placeholder">
+          <i class="fa-solid fa-map-location-dot"></i>
+          <p><strong>Lambanyi, Conakry</strong><br>République de Guinée<br><br><a href="https://maps.google.com/?q=Lambanyi+Conakry+Guinée" target="_blank" style="color:var(--blue);font-size:.85rem">Ouvrir dans Google Maps →</a></p>
+        </div>
+      </div>
+      <div class="map-info reveal d1">
+        <span class="section-tag">Notre Adresse</span>
+        <div class="divider"></div>
+        <h2>Où nous trouver</h2>
+        <div class="map-detail">
+          <div class="md-icon"><i class="fa-solid fa-location-dot"></i></div>
+          <div class="md-text"><strong>Siège Social</strong><span>Lambanyi, Conakry<br>République de Guinée</span></div>
+        </div>
+        <div class="map-detail">
+          <div class="md-icon"><i class="fa-solid fa-clock"></i></div>
+          <div class="md-text">
+            <strong>Horaires d'accueil</strong>
+            <div class="hours-grid">
+              <div class="hours-row"><span>Lun – Ven</span><span>08h – 18h</span></div>
+              <div class="hours-row"><span>Sam</span><span>09h – 14h</span></div>
+              <div class="hours-row"><span>Dim & JF</span><span>Sur RDV</span></div>
+              <div class="hours-row"><span>Urgences</span><span>24h/24</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="map-detail">
+          <div class="md-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <div class="md-text"><strong>Centre Opérationnel</strong><span>Actif 24h/24, 7j/7<br>Surveillance et interventions en continu</span></div>
+        </div>
+        <a href="https://maps.google.com/?q=Lambanyi+Conakry" target="_blank" class="btn btn-primary" style="margin-top:1rem"><i class="fa-solid fa-map"></i>Itinéraire Google Maps</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band">
+  <div class="container">
+    <h2>Besoin d'une intervention immédiate ?</h2>
+    <p>Notre centre opérationnel est actif 24h/24. Appelez ou écrivez, nous répondons.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/212778455789" class="btn btn-wa" target="_blank"><i class="fa-brands fa-whatsapp"></i>WhatsApp maintenant</a>
+      <a href="tel:+212778455789" class="btn btn-gold"><i class="fa-solid fa-phone"></i>Appeler le centre ops</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="ft-grid">
+      <div class="ft-about">
+        <a href="index.html" class="nav-logo"><div class="logo-icon"><i class="fa-solid fa-shield-halved"></i></div><div><span class="logo-text">LYNX <span>SÉCURITÉ</span></span><span class="logo-sub">Cybersécurité & Protection</span></div></a>
+        <p>L'entreprise de référence en sécurité privée et technologique en République de Guinée.</p>
+        <div class="ft-socials"><a href="#"><i class="fa-brands fa-facebook-f"></i></a><a href="#"><i class="fa-brands fa-linkedin-in"></i></a><a href="#"><i class="fa-brands fa-instagram"></i></a><a href="https://wa.me/212778455789"><i class="fa-brands fa-whatsapp"></i></a></div>
+      </div>
+      <div class="ft-col"><h4>Navigation</h4><ul><li><a href="index.html">Accueil</a></li><li><a href="services.html">Services</a></li><li><a href="cybersecurite.html">Cybersécurité</a></li><li><a href="apropos.html">À Propos</a></li><li><a href="methode.html">Notre Méthode</a></li><li><a href="contact.html">Réserver</a></li></ul></div>
+      <div class="ft-col"><h4>Contact</h4><div class="ft-ci"><i class="fa-solid fa-location-dot"></i><span>Lambanyi, Conakry, Guinée</span></div><div class="ft-ci"><i class="fa-brands fa-whatsapp"></i><a href="https://wa.me/212778455789">+212 778 455 789</a></div><div class="ft-ci"><i class="fa-solid fa-envelope"></i><a href="mailto:Sidikidiomande00@gmail.com">Sidikidiomande00@gmail.com</a></div></div>
+    </div>
+    <div class="ft-btm"><p>© 2025 LYNX SÉCURITÉ — Tous droits réservés.</p><p>Agréé État Guinéen — Opérationnel 24h/24, 7j/7</p></div>
+  </div>
+</footer>
+
+<script>
+/* ── STORAGE KEY ── */
+const DB_KEY = 'lynx_reservations';
+
+async function loadDB() {
+  try { const r = await window.storage.get(DB_KEY, true); return r ? JSON.parse(r.value) : []; }
+  catch(e) { return []; }
+}
+async function saveDB(list) {
+  await window.storage.set(DB_KEY, JSON.stringify(list), true);
+}
+
+/* ── URL PARAMS → pre-fill ── */
+const params = new URLSearchParams(location.search);
+const preService = params.get('service');
+if (preService) {
+  document.addEventListener('DOMContentLoaded', () => {
+    const sel = document.getElementById('serviceSelect');
+    if (sel) { sel.value = preService; triggerAvail(); }
+    document.querySelectorAll('.ql-item').forEach(el => {
+      if (el.textContent.trim().includes(preService.split(' ')[0])) el.classList.add('selected');
+    });
+  });
+}
+
+/* ── QUICK SELECT ── */
+function quickSelect(el, svc) {
+  document.querySelectorAll('.ql-item').forEach(i => i.classList.remove('selected'));
+  el.classList.add('selected');
+  const sel = document.getElementById('serviceSelect');
+  sel.value = svc;
+  triggerAvail();
+  document.getElementById('serviceSelect').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+/* ── URGENCY TOGGLE ── */
+let isUrgent = false;
+function toggleUrgency() {
+  isUrgent = !isUrgent;
+  const tog = document.getElementById('urgencyToggle');
+  tog.classList.toggle('checked', isUrgent);
+}
+
+/* ── AVAILABILITY CHECK ── */
+const serviceSelect = document.getElementById('serviceSelect');
+const dateInput     = document.getElementById('dateInput');
+const availMsg      = document.getElementById('availMsg');
+
+async function triggerAvail() {
+  const svc  = serviceSelect.value;
+  const date = dateInput.value;
+  if (!svc || !date) { availMsg.className = 'avail-msg'; return; }
+
+  availMsg.className = 'avail-msg checking';
+  availMsg.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Vérification en cours…';
+
+  const list = await loadDB();
+  const conflict = list.find(r => r.service === svc && r.date === date && r.status !== 'annulée');
+
+  if (conflict) {
+    availMsg.className = 'avail-msg ko';
+    availMsg.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Ce service est déjà réservé pour cette date. Choisissez une autre date.';
+  } else {
+    availMsg.className = 'avail-msg ok';
+    availMsg.innerHTML = '<i class="fa-solid fa-circle-check"></i> Créneau disponible — vous pouvez confirmer votre réservation.';
+  }
+}
+serviceSelect.addEventListener('change', triggerAvail);
+dateInput.addEventListener('change', triggerAvail);
+
+/* ── SUBMIT ── */
+const form      = document.getElementById('bookingForm');
+const submitBtn = document.getElementById('submitBtn');
+const successPanel = document.getElementById('successPanel');
+const refDisplay   = document.getElementById('refDisplay');
+
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+
+  const svc  = serviceSelect.value;
+  const date = dateInput.value;
+  if (!svc || !date) { alert('Veuillez sélectionner un service et une date.'); return; }
+
+  // Vérif finale de disponibilité
+  const list = await loadDB();
+  const conflict = list.find(r => r.service === svc && r.date === date && r.status !== 'annulée');
+  if (conflict) {
+    availMsg.className = 'avail-msg ko';
+    availMsg.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Ce créneau vient d\'être pris. Choisissez une autre date.';
+    return;
+  }
+
+  submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Enregistrement…';
+  submitBtn.disabled = true;
+
+  const ref = 'LNX-' + Date.now().toString(36).toUpperCase();
+  const entry = {
+    id:          ref,
+    service:     svc,
+    date:        date,
+    dateFin:     document.getElementById('dateEndInput').value || '—',
+    nom:         document.getElementById('nameInput').value,
+    telephone:   document.getElementById('phoneInput').value,
+    email:       document.getElementById('emailInput').value || '—',
+    localisation:document.getElementById('locationInput').value || '—',
+    agents:      document.getElementById('agentsInput').value || '—',
+    description: document.getElementById('descInput').value || '—',
+    urgent:      isUrgent,
+    status:      'en attente',
+    createdAt:   new Date().toISOString()
+  };
+
+  list.push(entry);
+  await saveDB(list);
+
+  refDisplay.textContent = ref;
+  form.style.display = 'none';
+  successPanel.classList.add('show');
+  successPanel.scrollIntoView({behavior:'smooth', block:'center'});
+});
+
+function resetForm() {
+  form.reset();
+  form.style.display = 'block';
+  successPanel.classList.remove('show');
+  submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Envoyer la demande';
+  submitBtn.disabled = false;
+  availMsg.className = 'avail-msg';
+  isUrgent = false;
+  document.getElementById('urgencyToggle').classList.remove('checked');
+  document.querySelectorAll('.ql-item').forEach(i => i.classList.remove('selected'));
+}
+
+/* ── NAV ── */
+const hbg = document.getElementById('hbg'), mob = document.getElementById('mobNav');
+hbg.addEventListener('click', () => {
+  mob.classList.toggle('open');
+  hbg.querySelector('i').className = mob.classList.contains('open') ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+});
+
+/* ── REVEAL ── */
+document.querySelectorAll('.reveal').forEach(el =>
+  new IntersectionObserver(([e]) => { if (e.isIntersecting) el.classList.add('on'); }, { threshold: .1 }).observe(el)
+);
+</script>
+</body>
+</html>
